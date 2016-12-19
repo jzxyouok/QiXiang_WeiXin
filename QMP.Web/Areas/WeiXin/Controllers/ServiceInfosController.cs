@@ -5,7 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using QMP.BLL;
+using QMP.BLL.SQL;
 using QMP.Models;
+using QMP.Models.SQL;
 using Senparc.Weixin.MP.CommonAPIs;
 using Senparc.Weixin.MP.Helpers;
 

@@ -5,7 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using QMP.BLL;
+using QMP.BLL.SQL;
 using QMP.Models;
+using QMP.Models.SQL;
 using QMP.ViewModels;
 
 namespace QMP.Web.Areas.Admin.Controllers
@@ -25,7 +27,7 @@ namespace QMP.Web.Areas.Admin.Controllers
                 bll.GetPageListOrderBy(id, 20, a => a.AccountID == user.AccountID, a => a.SendTime,false).ToList();
 
 
-
+          
 
             AutoMapper.Mapper.CreateMap<Messages, Messages_ViewModel>();
             List<Messages_ViewModel> newmodel = AutoMapper.Mapper.Map<List<Messages_ViewModel>>(mlist);

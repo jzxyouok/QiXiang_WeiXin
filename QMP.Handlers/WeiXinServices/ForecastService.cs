@@ -6,7 +6,9 @@ using System.Text;
 using Senparc.Weixin.MP.Entities;
 
 using QMP.BLL;
+using QMP.BLL.SQL;
 using QMP.Models;
+using QMP.Models.SQL;
 using Senparc.Weixin.MP.AdvancedAPIs;
 using Senparc.Weixin.MP.CommonAPIs;
 using Senparc.Weixin.MP.Containers;

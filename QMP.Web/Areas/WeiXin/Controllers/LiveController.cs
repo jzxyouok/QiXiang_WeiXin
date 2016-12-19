@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using QMP.BLL;
 using QMP.Models;
+using QMP.Models.SQL;
 using QMP.ViewModels;
 
 namespace QMP.Web.Areas.WeiXin.Controllers

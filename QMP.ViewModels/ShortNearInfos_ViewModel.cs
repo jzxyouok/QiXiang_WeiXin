@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using QMP.Models;
+using QMP.Models.SQL;
 
 namespace QMP.ViewModels
 {

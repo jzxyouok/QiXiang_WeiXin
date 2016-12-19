@@ -5,9 +5,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using HaiRui.Web;
 using QMP.BLL;
+using QMP.BLL.SQL;
 using QMP.Models;
-using QMP.Utility;
+using QMP.Models.SQL;
 using QMP.ViewModels;
 
 namespace QMP.Web.Controllers

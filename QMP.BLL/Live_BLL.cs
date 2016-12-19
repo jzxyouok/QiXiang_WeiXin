@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using QMP.DAL;
-using QMP.Models.OracleSA;
 using QMP.ViewModels;
 
 namespace QMP.BLL

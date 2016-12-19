@@ -16,6 +16,7 @@ namespace QMP.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //RequestUtility.SetHttpProxy("http://172.18.226.109", "808", "user-22", "user-22");
         }
     }
 }

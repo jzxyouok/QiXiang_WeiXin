@@ -36,7 +36,7 @@ namespace QMP.ViewModels
 
         [DataType(DataType.Password)]
         [Display(Name = "确认新密码")]
-        [Compare("NewPassWord", ErrorMessage = "新密码和确认密码不匹配。")]
+        [System.ComponentModel.DataAnnotations.Compare("NewPassWord", ErrorMessage = "新密码和确认密码不匹配。")]
         public string ConfirmPassWord { get; set; }
     }
     public class RegisterUserModel
@@ -53,7 +53,7 @@ namespace QMP.ViewModels
         public string PassWord { get; set; }
         [DataType(DataType.Password)]
         [Display(Name = "确认密码")]
-        [Compare("PassWord", ErrorMessage = "密码和确认密码不匹配。")]
+        [System.ComponentModel.DataAnnotations.Compare("PassWord", ErrorMessage = "密码和确认密码不匹配。")]
         public string ConfirmPassWord { get; set; }
 
     }
