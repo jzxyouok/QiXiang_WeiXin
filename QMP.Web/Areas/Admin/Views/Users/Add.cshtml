@@ -1,0 +1,77 @@
+﻿@model QMP.ViewModels.Users_Add_ViewModel
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<br />
+<ol class="breadcrumb">
+    <li><a href="~/Admin"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Admin</a></li>
+    <li><a href="~/Admin/Users/List"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;Users</a></li>
+    <li class="active"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Add</li>
+</ol>
+
+<div class="panel panel-info">
+    <div class="panel-heading">Add</div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm("Add", "Users", new { Area = "Admin" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, null, new { @class = "alert alert-danger alert-dismissable" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserName, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UserName)
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Password)
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RoleID, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(model => model.RoleID, ViewBag.RolesList as SelectList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.RoleID)
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AccountID, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(model => model.AccountID, ViewBag.AccountsList as SelectList, new { @class = "form-control" })
+
+
+                    @Html.ValidationMessageFor(model => model.AccountID)
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-11 col-md-offset-1">
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

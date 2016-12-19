@@ -1,0 +1,172 @@
+﻿@model QMP.Models.ServiceInfos
+
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Areas/WeiXin/Views/Shared/_Layout.cshtml";
+
+}
+<style type="text/css">
+    #contentdiv img {
+        width: 100% !important;
+    }
+</style>
+<div style='margin:0 auto;display:none;'>
+    <img src="@Url.Content("~/Content/images/countrylogo/" +Model.OfficialAccounts.CountryFullName+ ".jpg")"  />
+  
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-left" style="line-height: 30px;">
+                @Model.Title
+
+            </h3>
+            <p>
+                <small style="color: #808080;">@Model.ReleaseTime</small><a style="margin-left: 25px;" href="@Model.OfficialAccounts.SubscribeLink">@Model.OfficialAccounts.WeiXinName</a>
+            </p>
+
+        </div>
+    </div>
+    <div class="row">
+        <div id="contentdiv" class="col-md-12" style="overflow-x: hidden;">
+            @Html.Raw(Model.Content)
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: '@ViewData["AppId"]', // 必填，公众号的唯一标识
+        timestamp: '@ViewData["Timestamp"]', // 必填，生成签名的时间戳
+        nonceStr: '@ViewData["NonceStr"]', // 必填，生成签名的随机串
+        signature: '@ViewData["Signature"]', // 必填，签名
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onRecordEnd',
+            'playVoice',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'
+        ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2。详见：http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html
+    });
+
+    wx.ready(function() {
+        // 在这里调用 API
+        //wx.hideOptionMenu();
+        //分享到朋友圈
+        wx.onMenuShareTimeline({
+            title: '@Model.Title', // 分享标题
+            link: '@ViewData["Link"]', // 分享链接
+            //imgUrl: '~/Content/images/article/jiaozhou_santian.jpg', // 分享图标
+            imgUrl: '@Url.Content("http://weixin.qdqx.net.cn/Content/images/countrylogo/"+Model.OfficialAccounts.CountryFullName+".jpg")', // 分享图标
+
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+        //分享给朋友
+        wx.onMenuShareAppMessage({
+            title: '@Model.Title', // 分享标题
+            desc: '@Model.Title', // 分享描述
+            link: '@ViewData["Link"]', // 分享链接
+            imgUrl: 'https://mmbiz.qlogo.cn/mmbiz_jpg/ib0MtvHbkQs3aUppuCib9DobNEaI8o37M5zMvZrbjnJezAO10qico3cXuf7tVVDytZfm9PgQo6C3DxroxFV4bC2zw/0?wx_fmt=jpeg', // 分享图标
+
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+        wx.onMenuShareQQ({
+            title: '@Model.Title', // 分享标题
+            desc: '@Model.Title', // 分享描述
+            link: '@ViewData["Link"]', // 分享链接
+            imgUrl: '@Url.Content("http://weixin.qdqx.net.cn/Content/images/countrylogo/"+Model.OfficialAccounts.CountryFullName+".jpg")', // 分享图标
+
+                type: '', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+            wx.onMenuShareWeibo({
+                title: '@Model.Title', // 分享标题
+            desc: '@Model.Title', // 分享描述
+                link: '@ViewData["Link"]', // 分享链接
+                imgUrl: '@Url.Content("http://weixin.qdqx.net.cn/Content/images/countrylogo/"+Model.OfficialAccounts.CountryFullName+".jpg")', // 分享图标
+
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+        wx.onMenuShareQZone({
+            title: '@Model.Title', // 分享标题
+            desc: '@Model.Title', // 分享描述
+            link: '@ViewData["Link"]', // 分享链接
+            imgUrl: '@Url.Content("http://weixin.qdqx.net.cn/Content/images/countrylogo/"+Model.OfficialAccounts.CountryFullName+".jpg")', // 分享图标
+
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
+
+
+
+
+
+    wx.error(function(res) {
+        console.log(res);
+        alert('验证失败');
+    });
+
+    </script>
+}

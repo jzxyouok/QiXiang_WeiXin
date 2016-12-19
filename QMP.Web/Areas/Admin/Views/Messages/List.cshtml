@@ -1,0 +1,115 @@
+﻿@model StaticPagedList<QMP.ViewModels.Messages_ViewModel>
+@using PagedList
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "微信消息记录";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+   #info-table th, #info-table td {
+        text-align: center;vertical-align: middle;
+    }
+</style>
+
+<!-- Page Heading -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            微信消息记录 <small>向用户群发消息</small>
+        </h1>
+        @*<ol class="breadcrumb">
+            <li class="active">
+                <i class="fa fa-dashboard"></i> Dashboard
+            </li>
+        </ol>*@
+    </div>
+</div>
+<!-- /.row -->
+
+
+
+<table id="info-table" class="table table-bordered table-condensed" >
+    <tr>
+
+
+        <th>
+            时间
+        </th>
+        <th>
+            内容
+        </th>
+        <th>
+            发送总数
+        </th>
+        <th>
+            成功数量
+        </th>
+        <th>
+            失败数量
+        </th>
+        <th>
+            成功率
+        </th>
+        <th>
+            类型
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+         
+
+            <td>
+                @Html.DisplayFor(modelItem => item.SendTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SendTotalCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SendSuccessCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SendFailedCount)
+            </td>
+            <td>
+                @item.SendSuccessPercent
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: @item.SendSuccessPercent">
+                        <span class="sr-only">80% Complete</span>
+                    </div>
+
+                    <div class="progress-bar progress-bar-danger" style="width: @item.SendFailedPercent">
+                        <span class="sr-only"></span>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Messages_Categorys.CategoryName)
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("List", new { id = page }))
+
+
+    </div>
+</div>
+@section Scripts {
+
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+
+}

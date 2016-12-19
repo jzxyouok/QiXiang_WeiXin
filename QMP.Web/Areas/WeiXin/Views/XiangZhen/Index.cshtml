@@ -1,0 +1,104 @@
+﻿@model QMP.ViewModels.XiangZhen.XiangZhen_ViewModel
+
+@{
+    ViewBag.Title = "乡镇预报";
+    Layout = "~/Areas/WeiXin/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    body {
+         background-color: #253138;
+    }
+     #tianqitable {
+         width: 100%;
+         margin: 0 auto;
+         border-collapse: collapse;
+     }
+
+    #tianqitable td, #tianqitable th {
+        border: 1px solid #b5b6b7;
+        text-align: center;
+        vertical-align: central;
+        color: white;
+    }
+
+    #tianqitable th {
+        height: 40px;
+        background-color: #237d7a;
+        color: white;
+    }
+</style>
+
+<table id="tianqitable">
+    <tr >
+        <th colspan="6" style="background-color: #195a8b;padding:5px;">
+            <span style="font-size:22px;">乡镇预报</span>   
+            <br/>
+            <span style="font-size:12px;color:#d7cfcf">预报时间 @Model.ReleaseTimeString</span>   
+            
+        </th>
+       
+    </tr>
+
+    <tr>
+        <th>站名</th>
+        <th>预报日期</th>
+        <th>时间</th>
+        <th>天气状况</th>
+        <th>风向风速</th>
+        <th>温度</th>
+    </tr>
+  
+
+    @foreach (var item in Model.DataList)
+    {
+        <tr>
+            <td rowspan="6">@item.StationName</td>
+            <td rowspan="1">@item.DateTimeString_12</td>
+            <td>夜间</td>
+            <td>@item.TianQi_12</td>
+            <td>@item.WindDirection_12@item.WindJiString_12</td>
+            <td rowspan="2">@item.MinTemp_12_24<label>-</label>@item.MaxTemp_12_24<label>℃</label></td>
+
+        </tr>
+        <tr>
+            <td rowspan="2">@item.DateTimeString_24</td>
+
+            <td>白天</td>
+            <td>@item.TianQi_24</td>
+            <td>@item.WindDirection_24@item.WindJiString_24</td>
+
+        </tr>
+        <tr>
+
+            <td>夜间</td>
+            <td>@item.TianQi_36</td>
+            <td>@item.WindDirection_36@item.WindJiString_36</td>
+
+            <td rowspan="2">@item.MinTemp_36_48<label>-</label>@item.MaxTemp_36_48<label>℃</label></td>
+
+        </tr>
+        <tr>
+            <td rowspan="2">@item.DateTimeString_48</td>
+            <td>白天</td>
+            <td>@item.TianQi_48</td>
+            <td>@item.WindDirection_48@item.WindJiString_48</td>
+
+        </tr>
+        <tr>
+            <td>夜间</td>
+            <td>@item.TianQi_60</td>
+            <td>@item.WindDirection_60@item.WindJiString_60</td>
+            <td rowspan="2">@item.MinTemp_60_72<label>-</label>@item.MaxTemp_60_72<label>℃</label></td>
+
+        </tr>
+        <tr style="border-bottom:2px solid #ff6a00;">
+            <td rowspan="1">@item.DateTimeString_72</td>
+            <td>白天</td>
+            <td>@item.TianQi_72</td>
+            <td>@item.WindDirection_72@item.WindJiString_72</td>
+
+        </tr>
+    }
+    </table>

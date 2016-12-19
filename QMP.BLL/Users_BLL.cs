@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using HaiRui.Web;
 using QMP.Models;
-using QMP.Utility;
+using QMP.Models.SQL;
 
 namespace QMP.BLL
 {

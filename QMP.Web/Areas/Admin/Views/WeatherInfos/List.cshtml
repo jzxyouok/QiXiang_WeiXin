@@ -1,0 +1,110 @@
+﻿@model IEnumerable<QMP.ViewModels.WeatherInfos_ViewModel>
+
+@{
+    ViewBag.Title = "三天预报";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            三天预报 <small>发布三天预报</small>
+            @Html.ActionLink("发布三天预报", "Add", "WeatherInfos", new { Area = "Admin" }, new { @class = "btn btn-primary pull-right", role = "button" })
+
+
+        </h1>
+        @*<ol class="breadcrumb">
+            <li class="active">
+                <i class="fa fa-dashboard"></i> Dashboard
+            </li>
+        </ol>*@
+    </div>
+</div>
+<!-- /.row -->
+@*<div class="panel panel-info">
+    <div class="panel-heading">发布天气预报</div>
+    <div class="panel-body">*@
+<table class="table table-bordered">
+    <tr>
+
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content) 
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryID)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Users.UserName)
+            </td>
+            <td>
+
+                <span class="neirong" data-toggle="popover" data-trigger="hover" title="预报内容"
+                      data-content="@item.Content">
+                    详情
+                </span>
+
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WeatherInfos_Categorys.CategoryName)
+            </td>
+            <td>
+                <div class="btn-group" role="group">
+                    @Html.ActionLink("修改", "Edit", new { id = item.InfoID }, new { type = "button", @class = "btn btn-default" })
+                    @Html.ActionLink("删除", "Delete", new { id = item.InfoID }, new { type = "button", @class = "btn btn-danger" })
+                </div>
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+@*</div>
+    </div>*@
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('.neirong').popover();
+        })
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

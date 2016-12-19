@@ -1,0 +1,61 @@
+﻿@model QMP.ViewModels.WeatherSendSussess_ViewModel
+
+@{
+    Layout = null;
+}
+<style type="text/css">
+    .table-success {
+        width: 400px;
+        border-collapse: collapse;
+    }
+
+        .table-success td {
+            border: 1px #11cd6e solid;
+            padding: 10px 15px;
+            text-align: center;
+        }
+</style>
+<table class="table-success" style="margin: 50px auto;">
+    <tr>
+        <td>
+
+            <img src="~/Content/images/success.png" />
+        </td>
+        <td style="color: #11cd6e; font-size: 20px; font-weight: bold;">
+            发送成功
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2">@Model.Title</td>
+    </tr>
+    <tr>
+        <td colspan="2" style="color: orangered; font-style: italic;">
+            注：因腾讯公司规定，只有48小时内与公众号有过互动的用户才可收到该通知信息。
+        </td>
+    </tr>
+    <tr>
+        <td>发送总数</td>
+        <td>@Model.TotalCount</td>
+    </tr>
+    <tr>
+        <td>成功数量</td>
+        <td>@Model.SuccessCount</td>
+    </tr>
+    <tr>
+        <td>失败数量</td>
+        <td>@Model.FailedCount</td>
+    </tr>
+    <tr>
+        <td>
+            @Html.ActionLink("查看三天预报列表", "List", "WeatherInfos", new { Area = "Admin" }, new { @class = "btn btn-link", role = "button" })
+
+
+        </td>
+        <td>
+            @Html.ActionLink("查看消息记录", "List", "Messages", new { Area = "Admin" }, new { @class = "btn btn-link", role = "button" })
+
+
+        </td>
+    </tr>
+</table>

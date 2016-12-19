@@ -1,0 +1,161 @@
+﻿@model StaticPagedList<QMP.Models.ServiceInfos>
+@using PagedList
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "气象服务";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+
+
+
+<style type="text/css">
+    table td {
+        vertical-align: middle !important;
+    }
+</style>
+<!-- Page Heading -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            气象服务 <small>发布气象服务信息</small>
+            @Html.ActionLink("发布服务", "Add", "ServiceInfos", new { Area = "Admin" }, new { @class = "btn btn-primary pull-right", role = "button" })
+
+
+        </h1>
+       
+    </div>
+</div>
+<!-- /.row -->
+
+@*<div class="panel panel-primary">
+    <div class="panel-heading">Panel heading</div>*@
+    <table class="table table-bordered table-condensed table-striped">
+        <tr>
+            <th>
+                标题 
+            </th>
+            <th>
+                时间
+            </th>
+            <th>
+               类型
+            </th>
+            <th>
+                操作
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReleaseTime)
+                </td>
+                <td>
+                  @item.ServiceInfos_Categorys.CategoryName
+                </td>
+
+              
+                <td>
+                    <div class="btn-group" role="group">
+                        @Html.ActionLink("修改", "Edit", new { id = item.ServiceID }, new { type = "button", @class = "btn btn-default" })
+                        @Html.ActionLink("详情", "Details", new { id = item.ServiceID  }, new { type = "button", @class = "btn btn-default" })
+                        @Html.ActionLink("删除", "Delete", new { id = item.ServiceID }, new { type = "button", @class = "btn btn-danger" })
+
+
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+<div class="row">
+    <div class="col-md-12 text-center">
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("List", new { id = page }))
+
+        
+    </div>
+</div>
+     @*<div class="panel-footer text-center">*@
+
+
+    @*</div>*@
+@*</div>*@
+@section Scripts {
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

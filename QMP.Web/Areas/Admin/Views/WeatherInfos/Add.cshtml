@@ -1,0 +1,127 @@
+﻿@model QMP.ViewModels.WeatherInfos_ViewModel
+
+@{
+    ViewBag.Title = "发布三天预报";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Page Heading -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            三天预报 <small>发布三天预报</small>
+        </h1>
+        @*<ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-dashboard"></i> Dashboard
+                </li>
+            </ol>*@
+    </div>
+</div>
+<!-- /.row -->
+
+
+<div class="panel panel-info">
+    <div class="panel-heading">发布三天预报</div>
+    <div class="panel-body" id="WeatherCotentDiv">
+        @*@using (Html.BeginForm("Add", "WeatherInfos", new { Area = "Admin" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {*@
+        @using (Ajax.BeginForm("Add", "WeatherInfos", new { Area = "Admin" }, new AjaxOptions
+        {
+            //Confirm = "确定发布预警信号？",
+            HttpMethod = "Post",
+            InsertionMode = InsertionMode.Replace,
+            LoadingElementId = "LoadingDiv",
+            UpdateTargetId = "WeatherCotentDiv"
+        }, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, null, new { @class = "alert alert-danger alert-dismissable" })
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.CategoryID, new { @class = "col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.DropDownListFor(model => model.CategoryID, ViewBag.WeatherCategoryList as SelectList, new { @class = "form-control" })
+
+
+                        @Html.ValidationMessageFor(model => model.CategoryID)
+
+                    </div>
+                </div>*@
+            <div class="alert alert-danger" role="alert">
+                <strong>注意！根据腾讯公司规定，只有48小时内与公众号有过互动的用户才可收到该通知消息。未收到消息的用户可进入公众号自行查看。</strong>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreateTime, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    <input id="CreateTime" name="CreateTime" type="text" class="form-control" data-date-format="yyyy-mm-dd hh:ii" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm")">
+
+
+                    @Html.ValidationMessageFor(model => model.CreateTime)
+
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Content, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(model => model.Content, 10, 100, new { @class = "form-control", placeholder = "内容" })
+                    @Html.ValidationMessageFor(model => model.Content)
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-8">
+                    <button type="submit" class="btn btn-default">提交</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+<div id="LoadingDiv" style="width: 100%; height: 100%; display: none;position: absolute;left: 0;top:0;bottom: 0;right: 0;overflow: auto;
+    background: rgba(255, 255, 255, 0.51);
+    padding: 0;
+    margin: 0;
+    z-index: 100;
+    /*opacity: 0.3;*/">
+
+
+    <table style="width:300px;height:150px; margin:200px auto;">
+        <tr>
+            <td style="text-align: center;">
+
+                <img src="~/Content/images/loading.gif" />
+            </td>
+
+        </tr>
+        <tr>
+
+            <td style="text-align: center;">
+                正在发送，请稍后...
+            </td>
+        </tr>
+    </table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <link href="~/Scripts/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#CreateTime').datetimepicker({
+                language: 'zh-CN',
+                format: 'yyyy-mm-dd  hh:ii',
+                todayHighlight: true,
+                //minView: 2,
+                autoclose: true
+
+            });
+        });
+    </script>
+}

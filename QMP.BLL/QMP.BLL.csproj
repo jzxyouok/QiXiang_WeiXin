@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HaiRui.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HaiRui.Web.1.0.1\lib\HaiRui.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -76,6 +80,13 @@
       <Project>{cb9626ae-ed94-47b5-a2bc-666133adeac5}</Project>
       <Name>QMP.Utility</Name>
     </ProjectReference>
+    <ProjectReference Include="..\QMP.ViewModels\QMP.ViewModels.csproj">
+      <Project>{c4ee4b2f-48d1-4919-8afa-21c1fb8b0689}</Project>
+      <Name>QMP.ViewModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

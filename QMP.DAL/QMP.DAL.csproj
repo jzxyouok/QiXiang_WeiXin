@@ -30,8 +30,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aspose.Words, Version=15.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HaiRui.File.1.0.1\lib\Aspose.Words.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="HaiRui.File, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HaiRui.File.1.0.1\lib\HaiRui.File.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HaiRui.Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HaiRui.Net.1.0.0\lib\HaiRui.Net.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -69,6 +81,13 @@
       <Project>{65a9aac9-bc83-478e-93ae-30112f3d3775}</Project>
       <Name>QMP.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\QMP.ViewModels\QMP.ViewModels.csproj">
+      <Project>{c4ee4b2f-48d1-4919-8afa-21c1fb8b0689}</Project>
+      <Name>QMP.ViewModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

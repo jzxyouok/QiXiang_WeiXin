@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using QMP.DAL.SQL;
 
 namespace QMP.BLL.SQL
 {
     public abstract class Base_BLL_QMP<T> where T : class, new()
     {
-        protected Base_DAL<T> dal = new Base_DAL<T>();
+        protected Base_DAL_QMP<T> dal = new Base_DAL_QMP<T>();
 
         /// <summary>
         /// 添加

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using QMP.Models;
+using QMP.Models.Oracle;
 using QMP.ViewModels;
-using QMP.Models.OracleSA;
+using QMP.Models.SQL;
 
 namespace QMP.DAL
 {

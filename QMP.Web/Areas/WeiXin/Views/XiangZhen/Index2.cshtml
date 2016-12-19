@@ -1,0 +1,116 @@
+﻿@model QMP.ViewModels.XiangZhen.XiangZhen_ViewModel
+
+@{
+    ViewBag.Title = "乡镇预报";
+    Layout = "~/Areas/WeiXin/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    body {
+        background-color: #EBF2F2;
+    }
+
+    #tianqitable {
+        width: 100%;
+        margin: 0 auto;
+        border-collapse: collapse;
+    }
+
+        #tianqitable td, #tianqitable th {
+            /*border: 1px solid #b5b6b7;*/
+            text-align: center;
+            vertical-align: central;
+            color: #195a8b;
+            font-size: 16px;
+            padding: 5px 15px;
+        }
+
+        #tianqitable th {
+            height: 40px;
+            background-color: #237d7a;
+            color: #195a8b;
+        }
+</style>
+
+<table id="tianqitable">
+    <tr>
+        <th colspan="6" style="background-color: #d7cfcf;padding:5px;">
+            <span style="font-size:22px;">乡镇预报</span>
+            <br />
+            <span style="font-size:12px;color:#d7cfcf">预报时间 @Model.ReleaseTimeString</span>
+
+        </th>
+
+    </tr>
+
+
+
+
+    @foreach (var item in Model.DataList)
+    {
+
+
+
+
+        <tr>
+            <td colspan="3">
+                里岔三天预报
+                <br />  <span style="font-size:8px;color:#cc6436">发布时间：2016年08月08日20时</span>
+                
+            </td>
+        </tr>
+
+        <tr>
+            <td style="border-right:1px solid #cedbd8;">
+                @item.DateTimeString_12
+                <br />  <span style="font-size:8px;color:#808080">20时至次日20时</span>
+            </td>
+            <td style="border-right:1px solid #cedbd8;">
+                @item.DateTimeString_36
+                <br />  <span style="font-size:8px;color:#808080">20时至次日20时</span>
+            </td>
+            <td>
+                @item.DateTimeString_60
+                <br />  <span style="font-size:8px;color:#808080">20时至次日20时</span>
+            </td>
+        </tr>
+        <tr>
+            <td style="border-right:1px solid #cedbd8;">
+                @item.TianQi_12_24
+            </td>
+            <td style="border-right:1px solid #cedbd8;">
+                @item.TianQi_36_48
+            </td>
+            <td>
+                @item.TianQi_60_72
+            </td>
+        </tr>
+        <tr>
+            <td style="border-right:1px solid #cedbd8;">
+                @item.MinTemp_12_24 - @item.MaxTemp_12_24 ℃
+            </td>
+            <td style="border-right:1px solid #cedbd8;">
+                @item.MinTemp_36_48 - @item.MinTemp_36_48 ℃
+            </td>
+            <td>
+                @item.MinTemp_60_72 - @item.MinTemp_60_72 ℃
+            </td>
+        </tr>
+        <tr>
+            <td style="border-right:1px solid #cedbd8;">
+                @item.WindString_12_24
+            </td>
+            <td style="border-right:1px solid #cedbd8;">
+                @item.WindString_36_48
+            </td>
+            <td>
+                @item.WindString_60_72
+            </td>
+        </tr>
+
+
+
+
+    }
+</table>

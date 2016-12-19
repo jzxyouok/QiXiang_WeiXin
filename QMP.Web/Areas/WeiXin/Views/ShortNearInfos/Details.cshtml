@@ -1,0 +1,57 @@
+﻿@model QMP.Models.ShortNearInfos
+
+@{
+    ViewBag.Title = "短时临近预报";
+    Layout = "~/Areas/WeiXin/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    body {
+        background-color: #253138;
+    }
+
+    #info-table {
+        width: 100%;
+    }
+    #info-table td {
+
+        color: white;
+
+    }
+</style>
+@if (Model != null)
+{
+
+    <table id="info-table">
+        <tr>
+            <td style="padding: 5px;">
+                <img src="~/Content/images/article/@Model.OfficialAccounts.ShortNearImg"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center; color: #9b9595; font-size: 1.5em; padding: 5px 15px; background-color: #383c4a;">
+
+                @Html.DateFormat(Model.StartTime, "yyyy年MM月dd日HH时mm分发布")
+            </td>
+        </tr>
+        <tr>
+            <td class="text-left" style="font-size: 1em; padding: 5px 15px;">
+                @Html.Raw(Model.Content)
+
+
+            </td>
+        </tr>
+    </table>
+}
+else
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <br />
+            <div class="alert alert-danger" role="alert">
+                该预报信息已失效！
+            </div>
+        </div>
+    </div>
+   
+}
+

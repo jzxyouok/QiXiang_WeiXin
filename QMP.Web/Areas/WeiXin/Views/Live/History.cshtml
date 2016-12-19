@@ -1,0 +1,269 @@
+﻿@{
+    ViewBag.Title = ViewBag.ShortName + "24小时实况";
+    Layout = "~/Areas/WeiXin/Views/Shared/_Layout.cshtml";
+}
+
+<div id="container-shikuangtemp" style="width: 100%;"></div>
+<div id="container-shikuangrain" style="width: 100%;"></div>
+<div id="container-shikuangwind" style="width: 100%;"></div>
+@section Scripts{
+    <script src="~/Scripts/Highcharts-4.2.5/js/highcharts.js"></script>
+    @*<script src="~/Scripts/Highcharts-4.2.5/js/themes/dark-blue.js"></script>*@
+    @*<script src="~/Scripts/Highcharts-4.2.5/js/themes/gray.js"></script>*@
+    <script src="~/Scripts/Highcharts-4.2.5/js/themes/dark-unica.js"></script>
+    <script type="text/javascript">
+
+        var staname = "@ViewBag.StaName";
+        var shortname = "@ViewBag.ShortName";
+
+        $(function() {
+            $.ajax({
+                type: "POST",
+                url: "../../weixin/live/GetLast24HourData",
+                data: "staname=" + staname,
+                dataType: "json",
+                success: function(data) {
+                    console.log(data);
+
+                    var shijian = new Array();
+                    var wenduvalue = new Array();
+                    var rainvalue = new Array();
+                    var windspeedvalue = new Array();
+
+
+                    $.each(data,
+                        function(indexInArray, valueOfElement) {
+                            if (valueOfElement.Rain === 9999 ||
+                                valueOfElement.Temperature === 9999 ||
+                                valueOfElement.WindSpeed === 9999) {
+                            } else {
+                                shijian.push(valueOfElement.HourString);
+                                wenduvalue.push(valueOfElement.Temperature);
+                                rainvalue.push(valueOfElement.Rain);
+                                windspeedvalue.push(valueOfElement.WindSpeed);
+                            }
+
+                          
+                        });
+                    TempChart(shijian, wenduvalue);
+                    RainChart(shijian, rainvalue);
+                    console.log(staname);
+                    console.log(shijian);
+                    console.log(windspeedvalue);
+
+                    WindChart(shijian, windspeedvalue);
+
+
+                }
+            });
+        });
+
+
+        var TempChart = function(shijian, data) {
+
+
+            $('#container-shikuangtemp')
+                .highcharts({
+                    chart: {
+                        zoomType: 'xy'
+                    },
+                    title: {
+                        text: shortname + ' 最近24小时温度实况曲线图'
+                    },
+
+                    credits: {
+                        text: '',
+                        href: ''
+                    },
+                    xAxis: [
+                        {
+                            categories: shijian,
+                            type: 'datetime'
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            // Primary yAxis
+                            labels: {
+                                formatter: function() {
+                                    return this.value + ' ℃';
+                                },
+                                style: {
+                                    color: '#89A54E'
+                                }
+                            },
+                            title: {
+                                text: '温度',
+                                style: {
+                                    color: '#89A54E'
+                                }
+                            },
+
+                            opposite: true
+
+                        }
+                    ],
+                    tooltip: {
+                        shared: true
+                    },
+                    //legend: {
+                    //    layout: 'vertical',
+                    //    align: 'right',
+                    //    verticalAlign: 'middle',
+                    //    borderWidth: 0
+                    //},
+                    series: [
+                        {
+                            name: '温度',
+                            color: '#27aaff',
+                            type: 'spline',
+                            data: data,
+                            tooltip: {
+                                valueSuffix: ' °C'
+                            }
+                        }
+                    ]
+                });
+
+        }
+
+        var WindChart = function(shijian, data) {
+
+
+            $('#container-shikuangwind')
+                .highcharts({
+                    chart: {
+                        zoomType: 'xy'
+                    },
+                    title: {
+                        text: shortname + ' 最近24小时风速实况曲线图'
+                    },
+
+                    credits: {
+                        text: '',
+                        href: ''
+                    },
+                    xAxis: [
+                        {
+                            categories: shijian,
+                            type: 'datetime'
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            // Primary yAxis
+                            labels: {
+                                formatter: function() {
+                                    return this.value + ' m/s';
+                                },
+                                style: {
+                                    color: '#89A54E'
+                                }
+                            },
+                            title: {
+                                text: '风速',
+                                style: {
+                                    color: '#89A54E'
+                                }
+                            },
+
+                            opposite: true
+
+                        }
+                    ],
+                    tooltip: {
+                        shared: true
+                    },
+                    //legend: {
+                    //    layout: 'vertical',
+                    //    align: 'right',
+                    //    verticalAlign: 'middle',
+                    //    borderWidth: 0
+                    //},
+                    series: [
+                        {
+                            name: '风速',
+                            color: '#27aaff',
+                            type: 'spline',
+                            data: data,
+                            tooltip: {
+                                valueSuffix: ' m/s'
+                            }
+                        }
+                    ]
+                });
+
+        }
+        var RainChart = function(shijian, data) {
+
+
+            $('#container-shikuangrain')
+                .highcharts({
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: shortname + ' 最近24小时降水实况柱状图'
+                    },
+
+                    credits: {
+                        text: '',
+                        href: ''
+                    },
+                    xAxis: [
+                        {
+                            categories: shijian,
+                            type: 'datetime'
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            // Primary yAxis
+                            labels: {
+                                formatter: function() {
+                                    return this.value + ' mm';
+                                },
+                                style: {
+                                    color: '#89A54E'
+                                }
+                            },
+                            title: {
+                                text: '降水',
+                                style: {
+                                    color: '#89A54E'
+                                }
+                            },
+
+                            opposite: true
+
+                        }
+                    ],
+                    tooltip: {
+                        shared: true
+                    },
+                    //legend: {
+                    //    layout: 'vertical',
+                    //    align: 'right',
+                    //    verticalAlign: 'middle',
+                    //    borderWidth: 0
+                    //},
+                    series: [
+                        {
+                            name: '降水',
+                            color: '#4572A7',
+                            //type: 'column',
+                            //yAxis: 1,
+                            data: data,
+                            tooltip: {
+                                valueSuffix: ' mm'
+                            }
+
+                        }
+                    ]
+                });
+
+        }
+    </script>
+
+
+}

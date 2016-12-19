@@ -1,0 +1,35 @@
+﻿@model QMP.Models.ServiceInfos
+
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Areas/WeiXin/Views/Shared/_Layout.cshtml";
+
+}
+<style type="text/css">
+    #contentdiv img {
+        width: 100% !important;
+    }
+</style>
+<div style='margin:0 auto;display:none;'>
+    <img src="@Url.Content("~/Content/images/countrylogo/" +Model.OfficialAccounts.CountryFullName+ ".jpg")"  />
+  
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-left" style="line-height: 30px;">
+                @Model.Title
+
+            </h3>
+            <p>
+                <small style="color: #808080;">@Model.ReleaseTime</small><a style="margin-left: 25px;" href="@Model.OfficialAccounts.SubscribeLink">@Model.OfficialAccounts.WeiXinName</a>
+            </p>
+
+        </div>
+    </div>
+    <div class="row">
+        <div id="contentdiv" class="col-md-12" style="overflow-x: hidden;">
+            @Html.Raw(Model.Content)
+        </div>
+    </div>
+</div>

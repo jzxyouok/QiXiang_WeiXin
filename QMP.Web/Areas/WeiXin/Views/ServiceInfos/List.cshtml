@@ -1,0 +1,135 @@
+﻿@model StaticPagedList<QMP.Models.ServiceInfos>
+@using PagedList
+@using PagedList.Mvc
+
+
+@{
+    ViewBag.Title = ViewBag.CategoryName;
+    Layout = "~/Areas/WeiXin/Views/Shared/_Layout.cshtml";
+
+}
+<style type="text/css">
+    body {
+        background-color: #eeeeee;
+        font-family: 'Microsoft YaHei UI';
+    }
+
+
+
+    #info-ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        #info-ul li:nth-child(2n+1) {
+            background-color: #157498;
+            border-bottom: 1px solid #ebeef1;
+        }
+
+        #info-ul li:nth-child(2n) {
+            background-color: #eb7821;
+            border-bottom: 1px solid #ebeef1;
+        }
+
+        #info-ul li:nth-child(2n+1) table {
+            border-left: 8px solid #0a5475;
+        }
+
+        #info-ul li:nth-child(2n) table {
+            border-left: 8px solid #ff3e00;
+        }
+
+        #info-ul li a {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #info-ul table {
+            width: 100%;
+            color: #b9beb6;
+            height: 100%;
+        }
+
+            #info-ul table td {
+                padding: 10px 0;
+                vertical-align: middle;
+            }
+</style>
+<div class="container-fluid">
+    <br />
+    @if (Model.Count() > 0)
+    {
+
+        <ul id="info-ul">
+            @foreach (var item in Model)
+            {
+                <li>
+                    <a href="@Url.Action("Details", "ServiceInfos", new { Area = "WeiXin", id = item.ServiceID })" style="color: #ffffff;">
+
+
+                        <table>
+                            <tr>
+                                <td style="width:50px;padding-left: 10px; font-size: 30px; vertical-align: middle; color: #ffffff;">
+
+
+                                    <i class="fa fa-file-text-o"></i>
+
+                                </td>
+
+                                <td style="vertical-align: middle;">
+                                    <span style="color: white;">@item.Title</span>
+                                    <br />
+                                    <small>
+                                        @Html.DateFormat(item.ReleaseTime, "yyyy年M月d日 H时m分")
+                                    </small>
+                                </td>
+
+                                <td style="width: 40px;padding-right: 10px; vertical-align: middle; color: #ffffff;">
+                                    <span class="glyphicon glyphicon-menu-right"></span>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </a>
+                </li>
+
+            }
+        </ul>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                @Html.PagedListPager((IPagedList)Model, page => Url.Action("List", new { id = page }))
+
+
+            </div>
+        </div>
+
+    }
+
+
+
+
+
+
+    else
+    {
+        <div class="row">
+            <div class="col-md-12 text-center" style="font-size:2em; color: #eb7821;">
+                <i class="fa fa-frown-o fa-fw fa-2x"></i> <span>抱歉，暂未发布</span>@ViewBag.CategoryName<span>!</span>
+            </div>
+
+        </div>
+
+    }
+
+
+
+
+
+</div>
+@section Scripts {
+    <link href="~/Scripts/startbootstrap-sb-admin-1.0.4/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+}

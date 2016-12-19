@@ -1,0 +1,20 @@
+﻿
+@if (Request.IsAuthenticated)
+{
+   
+
+    @*<ul class="nav navbar-nav navbar-right">*@
+        <li>
+            @Html.ActionLink("你好，" + User.Identity.Name + "!", "Index", "Home", routeValues: new { Area =string.Empty  }, htmlAttributes: new { title = "首页" })
+        </li>
+        <li>@Html.ActionLink("注销", "LogOff", "Users", new { Area = string.Empty }, null)</li>
+    @*</ul>*@
+    
+}
+else
+{
+    @*<ul class="nav navbar-nav navbar-right">*@
+        <li>@Html.ActionLink("注册", "Register", "Users", routeValues: new { Area =string.Empty  }, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("登录", "Login", "Users", routeValues: new { Area = string.Empty }, htmlAttributes: new { id = "loginLink" })</li>
+    @*</ul>*@
+}

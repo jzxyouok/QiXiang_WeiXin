@@ -1,0 +1,83 @@
+﻿@model IEnumerable<QMP.Models.WarnInfos>
+
+@{
+    ViewBag.Title = "当前预警信号";
+    Layout = "~/Areas/WeiXin/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    body {
+        background-color: #253138;
+    }
+    
+</style>
+@if (Model.Count() > 0)
+{
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        @foreach (var item in Model)
+        {
+
+            <div class="itemheader" data-id="@item.InfoID" style="width: 100%; background-color: #383c4a; margin-top: 10px; padding: 10px;">
+                <table data-id="@item.InfoID" class="table-info" style="width: 100%;">
+                    <tr data-id="@item.InfoID">
+                        <td data-id="@item.InfoID" rowspan="2" style="text-align: center;">
+
+                            <img data-id="@item.InfoID" src="~/Content/images/warning/@item.ImageName" class="img-rounded"/>
+                        </td>
+                        <td data-id="@item.InfoID" style="font-size: 1.5em; color: white; text-align: left;">
+
+                            @item.WarningCategory@item.WarningLevel<span data-id="@item.InfoID">预警</span>
+
+                        </td>
+
+                    </tr>
+                    <tr data-id="@item.InfoID">
+                        <td data-id="@item.InfoID" style="color: #808080; text-align: left;">
+                            @Html.DateFormat((DateTime) item.ReleaseTime, "yyyy年M月d日H时m分")
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="collapsediv" style="width: 100%; display: block; background-color: rgb(48, 82, 77); color: white; padding: 15px;" id="collapse-@item.InfoID">
+                @Html.Raw(item.Content)
+            </div>
+
+
+        }
+
+
+    </div>
+    @section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $(".itemheader").click(function (e) {
+                var id = $(e.target).data("id");
+
+
+                $("#collapse-" + id).slideToggle();
+
+            });
+        });
+    </script>
+    }
+}
+else
+{
+    <table style="width:100%;">
+        <tr>
+            <td style="text-align: center;">
+
+                <img src="~/Content/images/smile.png" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4 class="text-center" style="color: white;">当前未发布预警信息！</h4>
+
+            </td>
+        </tr>
+    </table>
+}
+
+
+

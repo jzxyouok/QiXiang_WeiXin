@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using HaiRui.Web;
 using QMP.Models.SQL;
-using QMP.Utility;
+
 
 namespace QMP.BLL.SQL
 {

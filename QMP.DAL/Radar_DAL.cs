@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using QMP.Utility;
+using HaiRui.File;
 using QMP.ViewModels;
 
 namespace QMP.DAL

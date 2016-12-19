@@ -1,0 +1,15 @@
+﻿@model IEnumerable<QMP.ViewModels.WarnInfos_Colors_ViewModel>
+
+
+
+
+
+<select id="colorselect" name="CategoryID"  class="form-control">
+
+
+
+    @foreach (var item in Model)
+    {
+        <option value="@item.CategoryID">@item.Color</option>
+    }
+</select>
