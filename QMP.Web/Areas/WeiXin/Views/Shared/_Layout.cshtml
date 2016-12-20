@@ -7,6 +7,7 @@
     @Styles.Render("~/Content/bootstrap")
     <link href="~/Content/themes/base/slider.css" rel="stylesheet" />
     <link href="~/Content/themes/base/theme.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
     <style type="text/css">
         html, body {
             margin: 0;
@@ -19,7 +20,7 @@
 <body>
 
     @RenderBody()
-    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/jquery")*@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

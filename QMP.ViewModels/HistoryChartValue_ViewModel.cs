@@ -14,5 +14,6 @@ namespace QMP.ViewModels
         public Nullable<decimal> Rain { get; set; }
         public Nullable<decimal> WindSpeed { get; set; }
         public Nullable<decimal> Temperature { get; set; }
+
     }
 }

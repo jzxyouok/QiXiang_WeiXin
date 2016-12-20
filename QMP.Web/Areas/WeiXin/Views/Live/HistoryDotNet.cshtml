@@ -1,0 +1,17 @@
+﻿@model DotNet.Highcharts.Highcharts
+@{
+    ViewBag.Title = "HistoryDotNet";
+    Layout = "~/Areas/WeiXin/Views/Shared/_Layout.cshtml";
+}
+
+
+@(Model)
+@section Scripts{
+  
+     <script src="@Url.Content("~/Scripts/Highcharts-4.0.1/js/highcharts-all.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/Highcharts-4.0.1/js/modules/funnel.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/Highcharts-4.0.1/js/modules/solid-gauge.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/Highcharts-4.0.1/js/modules/drilldown.js")" type="text/javascript"></script>
+<script src="~/Scripts/Highcharts-4.0.1/js/themes/dark-unica.js"></script>
+
+}
