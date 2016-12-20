@@ -140,29 +140,141 @@ namespace QMP.Web.Areas.WeiXin.Controllers
 
             Live_BLL bll = new Live_BLL();
 
-        
+
             AutoStations_BLL abll = new AutoStations_BLL();
             AutoStations station = abll.Get(a => a.ShortName == staname);
 
-        
+
 
             List<HistoryChartValue_ViewModel> list = bll.GetLast24HourData(station.StationName);
 
 
 
 
-            Highcharts chart = new Highcharts("chart")
-                .SetTitle(new Title { Text = staname+"最近24小时实况图" })
-               
-                .SetXAxis(new XAxis
-                {
-                    Categories = list.Select(a => a.HourString).ToArray(),
-                    Type = AxisTypes.Datetime
-                })
-                .SetCredits(new Credits { Href = "", Text = "胶州天气" })
+            //Highcharts chart = new Highcharts("chart")
+            //    .SetTitle(new Title { Text = staname+"最近24小时实况图" })
 
-                  .SetYAxis(new YAxis[]
-                {
+            //    .SetXAxis(new XAxis
+            //    {
+            //        Categories = list.Select(a => a.HourString).ToArray(),
+            //        Type = AxisTypes.Datetime
+            //    })
+            //    .SetCredits(new Credits { Href = "", Text = "胶州天气" })
+
+            //      .SetYAxis(new YAxis[]
+            //    {
+            //       new YAxis
+            //      {
+            //           Id="1",
+            //          Title = new YAxisTitle { Text = "降水",Style="color:'#2f97da'" },
+
+            //          Opposite=true,
+            //          Labels=new YAxisLabels {Formatter="function () {return this.value + ' mm';}",Style="color:'#2f97da'" }
+            //       }, new YAxis
+            //      {
+            //           Id="2",
+            //          Title = new YAxisTitle { Text = "风速",Style="color:'#f15bda'" },
+            //          Opposite=true,
+
+            //          Labels=new YAxisLabels {Formatter="function () {return this.value + ' m/s';}",Style="color:'#f15bda'" }
+
+            //       }, new YAxis
+            //      {
+            //           Id="3",
+            //          Title = new YAxisTitle { Text = "温度",Style="color:'#30b197'"  },
+            //          Opposite=false,
+
+            //          Labels=new YAxisLabels {Formatter="function () {return this.value + ' ℃';}",Style="color:'#30b197'" }
+
+            //       }
+            //    })
+            //    .SetSeries(new[]
+            //    {
+            //        new Series
+            //        {
+
+            //            Type = ChartTypes.Column,
+            //            Name = "降水",
+            //           YAxis="1",
+            //           Color=Color.FromArgb(47,151,218),
+            //            Data = new Data(
+            //                list.Select(a=>new Point {Y= (double?)a.Rain}).ToArray()
+            //                ),
+
+            //            ZIndex=1,
+            //            PlotOptionsColumn=new PlotOptionsColumn
+            //        {
+            //            DataLabels = new PlotOptionsColumnDataLabels
+            //            {
+            //                Color = Color.White,
+            //                Enabled = true
+            //            },
+            //            EnableMouseTracking = true
+            //        }
+
+            //        },
+            //        new Series
+            //        {
+
+            //            Type = ChartTypes.Spline,
+            //            Name = "风速",
+            //           YAxis="2",
+            //           Color=Color.FromArgb(241,91,0),
+            //            Data = new Data(
+            //               list.Select(a=>new Point {Y= (double?)a.WindSpeed}).ToArray()
+            //                ),
+            //            ZIndex=2,
+            //             PlotOptionsLine=new PlotOptionsLine
+            //        {
+            //            DataLabels = new PlotOptionsLineDataLabels
+            //            {
+            //                Color = Color.White,
+            //                Enabled = true
+            //            },
+            //            EnableMouseTracking = true
+            //        }
+
+            //        },
+            //        new Series
+            //        {
+
+            //            Type = ChartTypes.Spline,
+            //            Name = "温度",
+            //           Color=Color.FromArgb(48,177,151),
+            //           YAxis="3",
+            //            Data = new Data(
+            //                list.Select(a=>new Point {Y= (double?)a.Temperature}).ToArray()
+            //                ),
+            //            ZIndex=3,
+            //             PlotOptionsLine=new PlotOptionsLine
+            //        {
+            //            DataLabels = new PlotOptionsLineDataLabels
+            //            {
+            //                Color = Color.White,
+            //                Enabled = true
+            //            },
+            //            EnableMouseTracking = true
+            //        }
+
+            //        }
+            //    })
+            //    .SetTooltip(new Tooltip
+            //    {
+            //        Crosshairs = new Crosshairs(true),
+            //        Shared = true
+            //    });
+            Highcharts chart1 = new Highcharts("chart1")
+               .SetTitle(new Title { Text = staname + "最近24小时降水实况直方图" })
+
+               .SetXAxis(new XAxis
+               {
+                   Categories = list.Select(a => a.HourString).ToArray(),
+                   Type = AxisTypes.Datetime
+               })
+               .SetCredits(new Credits { Href = "", Text = "胶州天气" })
+
+                 .SetYAxis(new YAxis[]
+               {
                    new YAxis
                   {
                        Id="1",
@@ -170,26 +282,10 @@ namespace QMP.Web.Areas.WeiXin.Controllers
 
                       Opposite=true,
                       Labels=new YAxisLabels {Formatter="function () {return this.value + ' mm';}",Style="color:'#2f97da'" }
-                   }, new YAxis
-                  {
-                       Id="2",
-                      Title = new YAxisTitle { Text = "风速",Style="color:'#f15bda'" },
-                      Opposite=true,
-
-                      Labels=new YAxisLabels {Formatter="function () {return this.value + ' m/s';}",Style="color:'#f15bda'" }
-
-                   }, new YAxis
-                  {
-                       Id="3",
-                      Title = new YAxisTitle { Text = "温度",Style="color:'#30b197'"  },
-                      Opposite=false,
-                      
-                      Labels=new YAxisLabels {Formatter="function () {return this.value + ' ℃';}",Style="color:'#30b197'" }
-                      
                    }
-                })
-                .SetSeries(new[]
-                {
+               })
+               .SetSeries(new[]
+               {
                     new Series
                     {
 
@@ -200,7 +296,7 @@ namespace QMP.Web.Areas.WeiXin.Controllers
                         Data = new Data(
                             list.Select(a=>new Point {Y= (double?)a.Rain}).ToArray()
                             ),
-                        
+
                         ZIndex=1,
                         PlotOptionsColumn=new PlotOptionsColumn
                     {
@@ -212,30 +308,40 @@ namespace QMP.Web.Areas.WeiXin.Controllers
                         EnableMouseTracking = true
                     }
 
-                    },
-                    new Series
-                    {
-
-                        Type = ChartTypes.Spline,
-                        Name = "风速",
-                       YAxis="2",
-                       Color=Color.FromArgb(241,91,0),
-                        Data = new Data(
-                           list.Select(a=>new Point {Y= (double?)a.WindSpeed}).ToArray()
-                            ),
-                        ZIndex=2,
-                         PlotOptionsLine=new PlotOptionsLine
-                    {
-                        DataLabels = new PlotOptionsLineDataLabels
-                        {
-                            Color = Color.White,
-                            Enabled = true
-                        },
-                        EnableMouseTracking = true
                     }
+               })
+               .SetTooltip(new Tooltip
+               {
+                   Crosshairs = new Crosshairs(true),
+                   Shared = true
+               });
 
-                    },
-                    new Series
+
+            Highcharts chart2 = new Highcharts("chart2")
+               .SetTitle(new Title { Text = staname + "最近24小时温度实况曲线图" })
+
+               .SetXAxis(new XAxis
+               {
+                   Categories = list.Select(a => a.HourString).ToArray(),
+                   Type = AxisTypes.Datetime
+               })
+               .SetCredits(new Credits { Href = "", Text = "胶州天气" })
+
+                 .SetYAxis(new YAxis[]
+               {
+                   new YAxis
+                  {
+                       Id="3",
+                      Title = new YAxisTitle { Text = "温度",Style="color:'#30b197'"  },
+                      Opposite=false,
+
+                      Labels=new YAxisLabels {Formatter="function () {return this.value + ' ℃';}",Style="color:'#30b197'" }
+
+                   }
+               })
+               .SetSeries(new[]
+               {
+                           new Series
                     {
 
                         Type = ChartTypes.Spline,
@@ -257,15 +363,70 @@ namespace QMP.Web.Areas.WeiXin.Controllers
                     }
 
                     }
+               })
+               .SetTooltip(new Tooltip
+               {
+                   Crosshairs = new Crosshairs(true),
+                   Shared = true
+               });
+
+            Highcharts chart3 = new Highcharts("chart3")
+                .SetTitle(new Title { Text = staname + "最近24小时大风实况曲线图" })
+
+                .SetXAxis(new XAxis
+                {
+                    Categories = list.Select(a => a.HourString).ToArray(),
+                    Type = AxisTypes.Datetime
+                })
+                .SetCredits(new Credits { Href = "", Text = "胶州天气" })
+
+                  .SetYAxis(new YAxis[]
+                {
+                 new YAxis
+                  {
+                       Id="2",
+                      Title = new YAxisTitle { Text = "风速",Style="color:'#f15bda'" },
+                      Opposite=true,
+
+                      Labels=new YAxisLabels {Formatter="function () {return this.value + ' m/s';}",Style="color:'#f15bda'" }
+
+                   }
+                })
+                .SetSeries(new[]
+                {
+                   
+                    new Series
+                    {
+
+                        Type = ChartTypes.Spline,
+                        Name = "风速",
+                       YAxis="2",
+                       Color=Color.FromArgb(241,91,0),
+                        Data = new Data(
+                           list.Select(a=>new Point {Y= (double?)a.WindSpeed}).ToArray()
+                            ),
+                        ZIndex=2,
+                         PlotOptionsLine=new PlotOptionsLine
+                    {
+                        DataLabels = new PlotOptionsLineDataLabels
+                        {
+                            Color = Color.White,
+                            Enabled = true
+                        },
+                        EnableMouseTracking = true
+                    }
+
+                    }
                 })
                 .SetTooltip(new Tooltip
                 {
                     Crosshairs = new Crosshairs(true),
                     Shared = true
-                })
-                ;
-
-            return View(chart);
+                });
+            ViewBag.Chart1 = chart1;
+            ViewBag.Chart2 = chart2;
+            ViewBag.Chart3 = chart3;
+            return View();
         }
 
 
