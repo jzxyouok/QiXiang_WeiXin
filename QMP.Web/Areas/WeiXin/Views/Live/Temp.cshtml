@@ -89,7 +89,7 @@
                 var edata = marker.getExtData();
 
 
-                var content = "<table style='font-size:12px;'><tr><td>站点:</td><td>" + edata.StaName + "</td></tr><tr><td>温度:</td><td>" + edata.Value + " ℃</td></tr><tr><td>时间:</td><td>" + edata.DateString + "</td></tr><tr><td colspan='2' style='text-align: right;'><a href='../../WeiXin/Live/History?staname=" + edata.StaName + "'>查看近24小时实况</a></td></tr></table>";
+                var content = "<table style='font-size:12px;'><tr><td>站点:</td><td>" + edata.StaName + "</td></tr><tr><td>温度:</td><td>" + edata.Value + " ℃</td></tr><tr><td>时间:</td><td>" + edata.DateString + "</td></tr><tr><td colspan='2' style='text-align: right;'><a href='../../WeiXin/Live/HistoryDotNet?staname=" + edata.StaName + "'>查看近24小时实况</a></td></tr></table>";
                 infoWindow.setContent(content);
                 infoWindow.open(map, marker.getPosition());
 
@@ -103,7 +103,7 @@
                 var edata = markerhtml.getExtData();
 
 
-                var content = "<table style='font-size:12px;'><tr><td>站点:</td><td>" + edata.StaName + "</td></tr><tr><td>温度:</td><td>" + edata.Value + " ℃</td></tr><tr><td>时间:</td><td>" + edata.DateString + "</td></tr><tr><td colspan='2' style='text-align: right;'><a href='../../WeiXin/Live/History?staname=" + edata.StaName + "'>查看近24小时实况</a></td></tr></table>";
+                var content = "<table style='font-size:12px;'><tr><td>站点:</td><td>" + edata.StaName + "</td></tr><tr><td>温度:</td><td>" + edata.Value + " ℃</td></tr><tr><td>时间:</td><td>" + edata.DateString + "</td></tr><tr><td colspan='2' style='text-align: right;'><a href='../../WeiXin/Live/HistoryDotNet?staname=" + edata.StaName + "'>查看近24小时实况</a></td></tr></table>";
                 infoWindow.setContent(content);
                 infoWindow.open(map, marker.getPosition());
 
