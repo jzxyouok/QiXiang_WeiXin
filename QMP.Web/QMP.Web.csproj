@@ -196,6 +196,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\images\article\dqyb.jpg" />
     <Content Include="Content\images\article\dslj.jpg" />
     <Content Include="Content\images\article\jiaozhou_santian.jpg" />
@@ -262,6 +264,7 @@
     <Content Include="Content\smalot-datetimepicker\bootstrap-datetimepicker.css" />
     <Content Include="Content\smalot-datetimepicker\bootstrap-datetimepicker.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -326,6 +329,11 @@
     <Content Include="Areas\WeiXin\Views\XiangZhen\Index2.cshtml" />
     <Content Include="Areas\WeiXin\Views\XiangZhen\Map.cshtml" />
     <Content Include="Areas\WeiXin\Views\Live\HistoryDotNet.cshtml" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Properties\PublishProfiles\mvc5.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\Highcharts-4.0.1\js\adapters\standalone-framework.js" />
