@@ -85,6 +85,7 @@
     <Compile Include="WeiXinMessageHandler.cs" />
     <Compile Include="WeiXinServices\ForecastService.cs" />
     <Compile Include="WeiXinServices\LocationService.cs" />
+    <Compile Include="WeiXinServices\TargetService.cs" />
     <Compile Include="WeiXinServices\TextRequestService.cs" />
   </ItemGroup>
   <ItemGroup>

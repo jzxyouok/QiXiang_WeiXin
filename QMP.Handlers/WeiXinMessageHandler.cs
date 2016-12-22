@@ -178,9 +178,18 @@ namespace QMP.Handlers
                 //var responseMessage = this.CreateResponseMessage<ResponseMessageText>();//ResponseMessageText也可以是News等其他类型
                 //responseMessage.Content = sb.ToString();
                 //return responseMessage;
+                if (requestMessage.Content.Contains("加入"))
+                {
+                    TargetService ts = new TargetService();
+                    ts.ApplyJoin(requestMessage);
+                }
+                else
+                {
+                    TextRequestService ts = new TextRequestService();
 
-                TextRequestService ts = new TextRequestService();
-                ts.ForecastReply(requestMessage);
+                    ts.ForecastReply(requestMessage);
+                }
+
                 return null;
             }
             catch (Exception ex)

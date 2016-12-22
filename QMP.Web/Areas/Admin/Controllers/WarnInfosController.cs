@@ -83,12 +83,6 @@ namespace QMP.Web.Areas.Admin.Controllers
             {
                 AccessTokenContainer.Register(appid, user.OfficialAccounts.AppSecret); //如果没有注册则进行注册
             }
-
-
-
-
-
-
             OpenIdResultJson users = UserApi.Get(appid, null);
             OpenIdResultJson_Data aa = users.data;
 
@@ -126,12 +120,10 @@ namespace QMP.Web.Areas.Admin.Controllers
 
                 if (sendResult != null)
                 {
-                    //return Content(sendResult.msgid.ToString());
                     chenggong++;
                 }
                 else
                 {
-                    //return Content("发送失败");
                     shibai++;
                 }
 
@@ -159,8 +151,6 @@ namespace QMP.Web.Areas.Admin.Controllers
             msgbll.Add(msg);
 
 
-            //Thread.Sleep(5000);
-            // return Content(chenggong.ToString());
 
             WarnSendSussess_ViewModel wsvm = new WarnSendSussess_ViewModel();
 
@@ -172,26 +162,7 @@ namespace QMP.Web.Areas.Admin.Controllers
 
             return PartialView("_AddSussess", wsvm);
 
-            //return RedirectToAction("List", "Messages", new { Area = "Admin" });
-
-
-
-
-
-
-
-
-
-
-            //if (bll.Add(newmodel) > 0)
-            //{
-            //    return RedirectToAction("Add");
-            //}
-            //else
-            //{
-            //    ModelState.AddModelError("", "添加失败，请稍后再试！");
-            //    return View(model);
-            //}
+           
 
 
         }
@@ -233,7 +204,6 @@ namespace QMP.Web.Areas.Admin.Controllers
 
 
             return PartialView(list);
-            //return Json(list, JsonRequestBehavior.AllowGet);
         }
         public ActionResult _GetWarnFangYu(string cate,string level)
         {
@@ -241,7 +211,6 @@ namespace QMP.Web.Areas.Admin.Controllers
             WarnInfos_Categorys_BLL bll = new WarnInfos_Categorys_BLL();
            WarnInfos_Categorys model= bll.Get(a => a.Name == cate.Trim() && a.Color == level.Trim());
            return Content(model.ZhiNan);
-            //return Json(list, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -280,7 +249,7 @@ namespace QMP.Web.Areas.Admin.Controllers
             vm.InfoID = model.InfoID;
             vm.Category = model.WarningCategory;
             vm.Level = model.WarningLevel;
-           // vm.RelieveTime = DateTime.Now;
+           
             return View(vm);
         }
 
@@ -334,8 +303,7 @@ namespace QMP.Web.Areas.Admin.Controllers
 
                 string url = "http://weixin.qdqx.net.cn/weixin/WarnInfos/List?accountid=" + user.AccountID;
 
-                SendTemplateMessageResult sendResult = TemplateApi.SendTemplateMessage(appid, openid,
-                    user.OfficialAccounts.WarnRelieveTemplateID,  url, yb);
+                SendTemplateMessageResult sendResult = TemplateApi.SendTemplateMessage(appid, openid, user.OfficialAccounts.WarnRelieveTemplateID, url, yb);
 
 
 
@@ -382,9 +350,7 @@ namespace QMP.Web.Areas.Admin.Controllers
 
             bll.Delete(a => a.AccountID == model.AccountID && a.WarningCategory == model.WarningCategory);
 
-
-
-             //Thread.Sleep(5000);
+            
 
 
              WarnSendSussess_ViewModel wsvm = new WarnSendSussess_ViewModel();
