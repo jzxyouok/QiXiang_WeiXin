@@ -74,7 +74,8 @@ namespace QMP.Web.Areas.Admin.Controllers
             newmodel.Content = model.Content.Trim() + "\r\n" + "防御指南：" + "\r\n" + model.FangYu.Trim();
 
             WarnInfos_BLL bll = new WarnInfos_BLL();
-
+            //发布之前先解除同类预警
+            bll.Delete(a => a.AccountID == newmodel.AccountID && a.WarningCategory == newmodel.WarningCategory);
             bll.Add(newmodel);
 
             string appid = user.OfficialAccounts.AppID;
@@ -377,16 +378,16 @@ namespace QMP.Web.Areas.Admin.Controllers
          
 
 
-            bll.Delete(model);
+          //解除
+
+            bll.Delete(a => a.AccountID == model.AccountID && a.WarningCategory == model.WarningCategory);
 
 
 
+             //Thread.Sleep(5000);
 
 
-            //Thread.Sleep(5000);
-         
-
-            WarnSendSussess_ViewModel wsvm = new WarnSendSussess_ViewModel();
+             WarnSendSussess_ViewModel wsvm = new WarnSendSussess_ViewModel();
 
             wsvm.TotalCount = msg.SendTotalCount;
             wsvm.SuccessCount = msg.SendSuccessCount;
