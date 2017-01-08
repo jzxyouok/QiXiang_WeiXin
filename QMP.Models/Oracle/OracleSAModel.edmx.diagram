@@ -8,6 +8,8 @@
         <EntityTypeShape EntityType="OracleSAModel.AWS_BASE_INFO" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OracleSAModel.DATAHOUR" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OracleSAModel.DATATEST" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OracleSAModel.YTHPT_EMERGENCY_STATION" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="OracleSAModel.YTHPT_EMERGENCY_WEATHER" Width="1.5" PointX="7.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -72,6 +72,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OracleSAModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Oracle\YTHPT_EMERGENCY_STATION.cs">
+      <DependentUpon>OracleSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Oracle\YTHPT_EMERGENCY_WEATHER.cs">
+      <DependentUpon>OracleSAModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQL\AutoStations.cs">
       <DependentUpon>QMPModel.tt</DependentUpon>

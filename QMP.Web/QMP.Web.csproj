@@ -178,6 +178,7 @@
     <Compile Include="Areas\WeiXin\Controllers\AQIController.cs" />
     <Compile Include="Areas\WeiXin\Controllers\CheckOldController.cs" />
     <Compile Include="Areas\WeiXin\Controllers\CheckController.cs" />
+    <Compile Include="Areas\WeiXin\Controllers\EmergencyController.cs" />
     <Compile Include="Areas\WeiXin\Controllers\LiveController.cs" />
     <Compile Include="Areas\WeiXin\Controllers\ServiceInfosController.cs" />
     <Compile Include="Areas\WeiXin\Controllers\ShortNearInfosController.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\WeiXin\Views\Emergency\HtmlPage1.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -336,6 +338,7 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="Areas\Admin\Views\YuJingTest\Index.cshtml" />
+    <Content Include="Areas\WeiXin\Views\Emergency\Map.cshtml" />
     <None Include="Properties\PublishProfiles\mvc5.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\Highcharts-4.0.1\js\adapters\standalone-framework.js" />

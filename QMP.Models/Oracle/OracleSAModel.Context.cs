@@ -28,5 +28,7 @@ namespace QMP.Models.Oracle
         public DbSet<AWS_BASE_INFO> AWS_BASE_INFO { get; set; }
         public DbSet<DATAHOUR> DATAHOUR { get; set; }
         public DbSet<DATATEST> DATATEST { get; set; }
+        public DbSet<YTHPT_EMERGENCY_STATION> YTHPT_EMERGENCY_STATION { get; set; }
+        public DbSet<YTHPT_EMERGENCY_WEATHER> YTHPT_EMERGENCY_WEATHER { get; set; }
     }
 }

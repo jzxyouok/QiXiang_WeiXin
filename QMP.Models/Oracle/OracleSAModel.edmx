@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OracleSAModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="10.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="OracleSAModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="10.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AWS_BASE_INFO">
           <Key>
             <PropertyRef Name="SNAME" />
@@ -141,13 +141,38 @@
           <Property Name="MINVISIBILITYTIME" Type="date" />
           <Property Name="SID" Type="number" Precision="38" Scale="0" />
         </EntityType>
+        <EntityType Name="YTHPT_EMERGENCY_STATION">
+          <Key>
+            <PropertyRef Name="FID" />
+          </Key>
+          <Property Name="FID" Type="nvarchar2" MaxLength="64" Nullable="false" />
+          <Property Name="STATIONNUMBER" Type="nvarchar2" MaxLength="50" />
+          <Property Name="STATIONNAME" Type="nvarchar2" MaxLength="50" />
+          <Property Name="EMERGENCY" Type="nvarchar2" MaxLength="50" />
+          <Property Name="LONGITUDE" Type="number" Precision="38" Scale="0" />
+          <Property Name="LATITUDE" Type="number" Precision="38" Scale="0" />
+          <Property Name="CREATETIME" Type="date" />
+          <Property Name="COUNTRY" Type="nvarchar2" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="YTHPT_EMERGENCY_WEATHER">
+          <Key>
+            <PropertyRef Name="FID" />
+          </Key>
+          <Property Name="FID" Type="nvarchar2" MaxLength="64" Nullable="false" />
+          <Property Name="CONTENT" Type="nvarchar2" MaxLength="500" />
+          <Property Name="RELEASETIME" Type="date" />
+          <Property Name="CREATETIME" Type="date" />
+          <Property Name="COUNTRY" Type="nvarchar2" MaxLength="20" />
+          <Property Name="EMERGENCY" Type="nvarchar2" MaxLength="50" />
+        </EntityType>
         <EntityContainer Name="OracleSAModelStoreContainer">
           <EntitySet Name="AWS_BASE_INFO" EntityType="Self.AWS_BASE_INFO" Schema="SA" store:Type="Tables" />
           <EntitySet Name="DATAHOUR" EntityType="Self.DATAHOUR" Schema="SA" store:Type="Tables" />
           <EntitySet Name="DATATEST" EntityType="Self.DATATEST" Schema="SA" store:Type="Tables" />
+          <EntitySet Name="YTHPT_EMERGENCY_STATION" EntityType="Self.YTHPT_EMERGENCY_STATION" Schema="SA" store:Type="Tables" />
+          <EntitySet Name="YTHPT_EMERGENCY_WEATHER" EntityType="Self.YTHPT_EMERGENCY_WEATHER" Schema="SA" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OracleSAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -291,7 +316,33 @@
           <EntitySet Name="AWS_BASE_INFO" EntityType="Self.AWS_BASE_INFO" />
           <EntitySet Name="DATAHOUR" EntityType="Self.DATAHOUR" />
           <EntitySet Name="DATATEST" EntityType="Self.DATATEST" />
+          <EntitySet Name="YTHPT_EMERGENCY_STATION" EntityType="OracleSAModel.YTHPT_EMERGENCY_STATION" />
+          <EntitySet Name="YTHPT_EMERGENCY_WEATHER" EntityType="OracleSAModel.YTHPT_EMERGENCY_WEATHER" />
         </EntityContainer>
+        <EntityType Name="YTHPT_EMERGENCY_STATION">
+          <Key>
+            <PropertyRef Name="FID" />
+          </Key>
+          <Property Name="FID" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="STATIONNUMBER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="STATIONNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EMERGENCY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LONGITUDE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="LATITUDE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CREATETIME" Type="DateTime" />
+          <Property Name="COUNTRY" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="YTHPT_EMERGENCY_WEATHER">
+          <Key>
+            <PropertyRef Name="FID" />
+          </Key>
+          <Property Name="FID" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CONTENT" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="RELEASETIME" Type="DateTime" />
+          <Property Name="CREATETIME" Type="DateTime" />
+          <Property Name="COUNTRY" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EMERGENCY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -433,6 +484,32 @@
                 <ScalarProperty Name="MINVISIBILITY" ColumnName="MINVISIBILITY" />
                 <ScalarProperty Name="MINVISIBILITYTIME" ColumnName="MINVISIBILITYTIME" />
                 <ScalarProperty Name="SID" ColumnName="SID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="YTHPT_EMERGENCY_STATION">
+            <EntityTypeMapping TypeName="OracleSAModel.YTHPT_EMERGENCY_STATION">
+              <MappingFragment StoreEntitySet="YTHPT_EMERGENCY_STATION">
+                <ScalarProperty Name="COUNTRY" ColumnName="COUNTRY" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="LATITUDE" ColumnName="LATITUDE" />
+                <ScalarProperty Name="LONGITUDE" ColumnName="LONGITUDE" />
+                <ScalarProperty Name="EMERGENCY" ColumnName="EMERGENCY" />
+                <ScalarProperty Name="STATIONNAME" ColumnName="STATIONNAME" />
+                <ScalarProperty Name="STATIONNUMBER" ColumnName="STATIONNUMBER" />
+                <ScalarProperty Name="FID" ColumnName="FID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="YTHPT_EMERGENCY_WEATHER">
+            <EntityTypeMapping TypeName="OracleSAModel.YTHPT_EMERGENCY_WEATHER">
+              <MappingFragment StoreEntitySet="YTHPT_EMERGENCY_WEATHER">
+                <ScalarProperty Name="EMERGENCY" ColumnName="EMERGENCY" />
+                <ScalarProperty Name="COUNTRY" ColumnName="COUNTRY" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="RELEASETIME" ColumnName="RELEASETIME" />
+                <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+                <ScalarProperty Name="FID" ColumnName="FID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
