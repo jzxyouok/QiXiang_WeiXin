@@ -27,6 +27,7 @@ namespace QMP.Models.SQL
         public Nullable<int> CategoryID { get; set; }
         public Nullable<System.Guid> AccountID { get; set; }
         public Nullable<System.Guid> UserID { get; set; }
+        public Nullable<bool> IsTest { get; set; }
     
         public virtual OfficialAccounts OfficialAccounts { get; set; }
         public virtual ICollection<ServiceInfos_Images> ServiceInfos_Images { get; set; }

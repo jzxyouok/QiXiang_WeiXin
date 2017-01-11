@@ -22,6 +22,7 @@ namespace QMP.Models.SQL
         public Nullable<System.Guid> UserID { get; set; }
         public Nullable<System.Guid> AccountID { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
+        public Nullable<bool> IsTest { get; set; }
     
         public virtual OfficialAccounts OfficialAccounts { get; set; }
         public virtual Users Users { get; set; }

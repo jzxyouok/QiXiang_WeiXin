@@ -23,6 +23,7 @@ namespace QMP.Models.SQL
         public string WarningCategory { get; set; }
         public string WarningLevel { get; set; }
         public string ImageName { get; set; }
+        public Nullable<bool> IsTest { get; set; }
     
         public virtual OfficialAccounts OfficialAccounts { get; set; }
         public virtual Users Users { get; set; }
