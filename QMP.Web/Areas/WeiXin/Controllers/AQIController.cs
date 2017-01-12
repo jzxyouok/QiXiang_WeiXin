@@ -99,6 +99,10 @@ namespace QMP.Web.Areas.WeiXin.Controllers
             {
                 url = "http://172.18.226.106:88/laixi/aqi/GetAQIJson";
             }
+            else if(city == "城阳区")
+            {
+                url = "http://172.18.226.106:88/chengyang/aqi/GetAQIJson";
+            }
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 
             request.Method = "GET";

@@ -36,5 +36,8 @@ namespace QMP.Web.Areas.Super.Controllers
            var count= bll.SaveChange();
             return Content(count.ToString());
         }
+
+
+       
     }
 }
