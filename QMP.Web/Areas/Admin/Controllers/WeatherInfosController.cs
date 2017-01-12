@@ -41,8 +41,14 @@ namespace QMP.Web.Areas.Admin.Controllers
             model.InfoID = Guid.NewGuid();
 
             model.AccountID = user.AccountID;
-            
-            model.CategoryID = 1;
+
+
+
+            ///
+            WeatherInfos_Categorys cate =new WeatherInfos_Categorys_BLL().Get(a => a.AccountID == user.AccountID && a.CategoryName == "三天预报");
+
+
+            model.CategoryID = cate.CategoryID;
             AutoMapper.Mapper.CreateMap<WeatherInfos_ViewModel, WeatherInfos>();
             WeatherInfos newmodel = AutoMapper.Mapper.Map<WeatherInfos>(model);
 

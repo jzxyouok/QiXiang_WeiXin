@@ -22,7 +22,8 @@ namespace QMP.Web.Areas.Admin.Controllers
 
         public ActionResult Add()
         {
-            ViewBag.CategoryList = new SelectList(new ServiceInfos_Categorys_BLL().GetList(), "CategoryID", "CategoryName", null);
+            Users user = new Users_BLL().GetCurrentUser();
+            ViewBag.CategoryList = new SelectList(new ServiceInfos_Categorys_BLL().GetList(a=>a.AccountID== user.AccountID), "CategoryID", "CategoryName", null);
    
             return View();
         }
