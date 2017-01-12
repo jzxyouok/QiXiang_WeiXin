@@ -384,6 +384,7 @@
     <Content Include="Areas\WeiXin\Views\Emergency\Map.cshtml" />
     <Content Include="Areas\Super\Views\web.config" />
     <Content Include="Areas\Super\Views\Station\OracleToSql.cshtml" />
+    <Content Include="Areas\Super\Views\Station\Service.cshtml" />
     <None Include="Properties\PublishProfiles\mvc5.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\Highcharts-4.0.1\js\adapters\standalone-framework.js" />

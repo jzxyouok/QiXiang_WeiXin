@@ -18,17 +18,18 @@ namespace QMP.Web.Areas.WeiXin.Controllers
         //
         // GET: /WeiXin/ServiceInfos/
 
-        public ActionResult List(Guid accountid, int categoryid=1, int id = 1)
+        public ActionResult List(Guid aid,string cname, int id = 1)
         {
 
 
+            ServiceInfos_Categorys category = new ServiceInfos_Categorys_BLL().Get(a => a.AccountID == aid && a.CategoryName == cname);
 
-            ViewBag.CategoryName = new ServiceInfos_Categorys_BLL().Get(a => a.CategoryID == categoryid).CategoryName;
+            ViewBag.CategoryName = category.CategoryName;
             
             ServiceInfos_BLL bll = new ServiceInfos_BLL();
-            List<ServiceInfos> ylist = bll.GetPageListOrderBy(id, 20, a => a.AccountID == accountid && a.CategoryID == categoryid, a => a.CreateTime, false).ToList();
+            List<ServiceInfos> ylist = bll.GetPageListOrderBy(id, 20, a => a.AccountID == aid && a.CategoryID == category.CategoryID, a => a.CreateTime, false).ToList();
 
-            int totalCount = bll.GetCount(a => a.AccountID == accountid && a.CategoryID == categoryid);
+            int totalCount = bll.GetCount(a => a.AccountID == aid && a.CategoryID == category.CategoryID);
             var list = new StaticPagedList<ServiceInfos>(ylist, id, 20, totalCount);
             return View(list);
         }

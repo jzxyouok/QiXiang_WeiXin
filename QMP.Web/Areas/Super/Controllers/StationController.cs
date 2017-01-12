@@ -37,7 +37,22 @@ namespace QMP.Web.Areas.Super.Controllers
             return Content(count.ToString());
         }
 
+        public ActionResult Service()
+        {
+            ServiceInfos_BLL bll = new ServiceInfos_BLL();
+            ServiceInfos_Categorys_BLL cbll = new ServiceInfos_Categorys_BLL();
+            List<ServiceInfos> yuanlist = bll.GetList().ToList();
+            foreach (var service in yuanlist)
+            {
+                ServiceInfos_Categorys cate= cbll.Get(a =>a.AccountID == service.AccountID &&a.CategoryName == service.ServiceInfos_Categorys.CategoryName);
+                service.CategoryID = cate.CategoryID;
+                bll.Update(service,false);
+            }
+            
+            return Content(bll.SaveChange().ToString());
+        }
 
-       
+
+
     }
 }
