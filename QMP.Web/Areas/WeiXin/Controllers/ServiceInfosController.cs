@@ -23,7 +23,7 @@ namespace QMP.Web.Areas.WeiXin.Controllers
 
 
             ServiceInfos_Categorys category = new ServiceInfos_Categorys_BLL().Get(a => a.AccountID == aid && a.CategoryName == cname);
-
+            ViewBag.AccountId = aid;
             ViewBag.CategoryName = category.CategoryName;
             
             ServiceInfos_BLL bll = new ServiceInfos_BLL();
