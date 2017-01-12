@@ -20,7 +20,6 @@
         <EntityTypeShape EntityType="QMPModel.WarnInfos" Width="1.5" PointX="8.25" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="QMPModel.WarnInfos_Categorys" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QMPModel.WeatherInfos" Width="1.5" PointX="8.25" PointY="22.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QMPModel.WeatherInfos_Categorys" Width="1.5" PointX="3" PointY="34.75" IsExpanded="true" />
         <AssociationConnector Association="QMPModel.FK_AutoStations_OfficialAccounts" ManuallyRouted="false" />
         <AssociationConnector Association="QMPModel.FK_Messages_Messages_Categorys" ManuallyRouted="false" />
         <AssociationConnector Association="QMPModel.FK_Messages_OfficialAccounts" ManuallyRouted="false" />
@@ -31,7 +30,6 @@
         <AssociationConnector Association="QMPModel.FK_Subscribers_OfficialAccounts" ManuallyRouted="false" />
         <AssociationConnector Association="QMPModel.FK_Users_OfficialAccounts" ManuallyRouted="false" />
         <AssociationConnector Association="QMPModel.FK_WarnInfos_OfficialAccounts" ManuallyRouted="false" />
-        <AssociationConnector Association="QMPModel.FK_WeatherInfos_Categorys_OfficialAccounts" ManuallyRouted="false" />
         <AssociationConnector Association="QMPModel.FK_WeatherInfos_OfficialAccounts" ManuallyRouted="false" />
         <AssociationConnector Association="QMPModel.FK_ServiceInfos_Images_ServiceInfos" ManuallyRouted="false" />
         <AssociationConnector Association="QMPModel.FK_ServiceInfos_ServiceInfos_Categorys" ManuallyRouted="false" />
@@ -40,7 +38,8 @@
         <AssociationConnector Association="QMPModel.FK_Users_Users_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="QMPModel.FK_WarnInfos_Users" ManuallyRouted="false" />
         <AssociationConnector Association="QMPModel.FK_WeatherInfos_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="QMPModel.FK_WeatherInfos_WeatherInfos_Categorys" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QMPModel.WeatherInfos_Categorys" Width="1.5" PointX="0.75" PointY="3.875" />
+        <AssociationConnector Association="QMPModel.FK_WeatherInfos_WeatherInfos_Categorys" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

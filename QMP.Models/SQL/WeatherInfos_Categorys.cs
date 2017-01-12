@@ -19,12 +19,10 @@ namespace QMP.Models.SQL
             this.WeatherInfos = new HashSet<WeatherInfos>();
         }
     
+        public int CategoryID { get; set; }
         public string CategoryName { get; set; }
         public string CategoryDescription { get; set; }
-        public int CategoryID { get; set; }
-        public Nullable<System.Guid> AccountID { get; set; }
     
-        public virtual OfficialAccounts OfficialAccounts { get; set; }
         public virtual ICollection<WeatherInfos> WeatherInfos { get; set; }
     }
 }

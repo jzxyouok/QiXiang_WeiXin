@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QMPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="QMPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AutoStations">
           <Key>
             <PropertyRef Name="ID" />
@@ -206,10 +206,9 @@
           <Key>
             <PropertyRef Name="CategoryID" />
           </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryName" Type="nvarchar" MaxLength="20" />
           <Property Name="CategoryDescription" Type="nvarchar" MaxLength="50" />
-          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AccountID" Type="uniqueidentifier" />
         </EntityType>
         <Association Name="FK_AutoStations_OfficialAccounts">
           <End Role="OfficialAccounts" Type="Self.OfficialAccounts" Multiplicity="0..1" />
@@ -403,18 +402,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_WeatherInfos_Categorys_OfficialAccounts">
-          <End Role="OfficialAccounts" Type="Self.OfficialAccounts" Multiplicity="0..1" />
-          <End Role="WeatherInfos_Categorys" Type="Self.WeatherInfos_Categorys" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OfficialAccounts">
-              <PropertyRef Name="AccountID" />
-            </Principal>
-            <Dependent Role="WeatherInfos_Categorys">
-              <PropertyRef Name="AccountID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_WeatherInfos_OfficialAccounts">
           <End Role="OfficialAccounts" Type="Self.OfficialAccounts" Multiplicity="0..1" />
           <End Role="WeatherInfos" Type="Self.WeatherInfos" Multiplicity="*" />
@@ -532,10 +519,6 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="WarnInfos" EntitySet="WarnInfos" />
           </AssociationSet>
-          <AssociationSet Name="FK_WeatherInfos_Categorys_OfficialAccounts" Association="Self.FK_WeatherInfos_Categorys_OfficialAccounts">
-            <End Role="OfficialAccounts" EntitySet="OfficialAccounts" />
-            <End Role="WeatherInfos_Categorys" EntitySet="WeatherInfos_Categorys" />
-          </AssociationSet>
           <AssociationSet Name="FK_WeatherInfos_OfficialAccounts" Association="Self.FK_WeatherInfos_OfficialAccounts">
             <End Role="OfficialAccounts" EntitySet="OfficialAccounts" />
             <End Role="WeatherInfos" EntitySet="WeatherInfos" />
@@ -549,8 +532,7 @@
             <End Role="WeatherInfos" EntitySet="WeatherInfos" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QMPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -623,7 +605,6 @@
           <NavigationProperty Name="Subscribers" Relationship="Self.FK_Subscribers_OfficialAccounts" FromRole="OfficialAccounts" ToRole="Subscribers" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_OfficialAccounts" FromRole="OfficialAccounts" ToRole="Users" />
           <NavigationProperty Name="WarnInfos" Relationship="Self.FK_WarnInfos_OfficialAccounts" FromRole="OfficialAccounts" ToRole="WarnInfos" />
-          <NavigationProperty Name="WeatherInfos_Categorys" Relationship="Self.FK_WeatherInfos_Categorys_OfficialAccounts" FromRole="OfficialAccounts" ToRole="WeatherInfos_Categorys" />
           <NavigationProperty Name="WeatherInfos" Relationship="Self.FK_WeatherInfos_OfficialAccounts" FromRole="OfficialAccounts" ToRole="WeatherInfos" />
         </EntityType>
         <EntityType Name="ServiceInfos">
@@ -787,18 +768,7 @@
           <Property Name="ReleaseTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="OfficialAccounts" Relationship="Self.FK_WeatherInfos_OfficialAccounts" FromRole="WeatherInfos" ToRole="OfficialAccounts" />
           <NavigationProperty Name="Users" Relationship="Self.FK_WeatherInfos_Users" FromRole="WeatherInfos" ToRole="Users" />
-          <NavigationProperty Name="WeatherInfos_Categorys" Relationship="Self.FK_WeatherInfos_WeatherInfos_Categorys" FromRole="WeatherInfos" ToRole="WeatherInfos_Categorys" />
-        </EntityType>
-        <EntityType Name="WeatherInfos_Categorys">
-          <Key>
-            <PropertyRef Name="CategoryID" />
-          </Key>
-          <Property Name="CategoryName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CategoryDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AccountID" Type="Guid" />
-          <NavigationProperty Name="OfficialAccounts" Relationship="Self.FK_WeatherInfos_Categorys_OfficialAccounts" FromRole="WeatherInfos_Categorys" ToRole="OfficialAccounts" />
-          <NavigationProperty Name="WeatherInfos" Relationship="Self.FK_WeatherInfos_WeatherInfos_Categorys" FromRole="WeatherInfos_Categorys" ToRole="WeatherInfos" />
+          <NavigationProperty Name="WeatherInfos_Categorys" Relationship="QMPModel.FK_WeatherInfos_WeatherInfos_Categorys" FromRole="WeatherInfos" ToRole="WeatherInfos_Categorys" />
         </EntityType>
         <Association Name="FK_AutoStations_OfficialAccounts">
           <End Role="OfficialAccounts" Type="Self.OfficialAccounts" Multiplicity="0..1" />
@@ -920,18 +890,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_WeatherInfos_Categorys_OfficialAccounts">
-          <End Role="OfficialAccounts" Type="Self.OfficialAccounts" Multiplicity="0..1" />
-          <End Role="WeatherInfos_Categorys" Type="Self.WeatherInfos_Categorys" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OfficialAccounts">
-              <PropertyRef Name="AccountID" />
-            </Principal>
-            <Dependent Role="WeatherInfos_Categorys">
-              <PropertyRef Name="AccountID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_WeatherInfos_OfficialAccounts">
           <End Role="OfficialAccounts" Type="Self.OfficialAccounts" Multiplicity="0..1" />
           <End Role="WeatherInfos" Type="Self.WeatherInfos" Multiplicity="*" />
@@ -1028,18 +986,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_WeatherInfos_WeatherInfos_Categorys">
-          <End Role="WeatherInfos_Categorys" Type="Self.WeatherInfos_Categorys" Multiplicity="0..1" />
-          <End Role="WeatherInfos" Type="Self.WeatherInfos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WeatherInfos_Categorys">
-              <PropertyRef Name="CategoryID" />
-            </Principal>
-            <Dependent Role="WeatherInfos">
-              <PropertyRef Name="CategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="QMPEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AutoStations" EntityType="Self.AutoStations" />
           <EntitySet Name="Messages" EntityType="Self.Messages" />
@@ -1056,7 +1002,6 @@
           <EntitySet Name="WarnInfos" EntityType="Self.WarnInfos" />
           <EntitySet Name="WarnInfos_Categorys" EntityType="Self.WarnInfos_Categorys" />
           <EntitySet Name="WeatherInfos" EntityType="Self.WeatherInfos" />
-          <EntitySet Name="WeatherInfos_Categorys" EntityType="Self.WeatherInfos_Categorys" />
           <AssociationSet Name="FK_AutoStations_OfficialAccounts" Association="Self.FK_AutoStations_OfficialAccounts">
             <End Role="OfficialAccounts" EntitySet="OfficialAccounts" />
             <End Role="AutoStations" EntitySet="AutoStations" />
@@ -1097,10 +1042,6 @@
             <End Role="OfficialAccounts" EntitySet="OfficialAccounts" />
             <End Role="WarnInfos" EntitySet="WarnInfos" />
           </AssociationSet>
-          <AssociationSet Name="FK_WeatherInfos_Categorys_OfficialAccounts" Association="Self.FK_WeatherInfos_Categorys_OfficialAccounts">
-            <End Role="OfficialAccounts" EntitySet="OfficialAccounts" />
-            <End Role="WeatherInfos_Categorys" EntitySet="WeatherInfos_Categorys" />
-          </AssociationSet>
           <AssociationSet Name="FK_WeatherInfos_OfficialAccounts" Association="Self.FK_WeatherInfos_OfficialAccounts">
             <End Role="OfficialAccounts" EntitySet="OfficialAccounts" />
             <End Role="WeatherInfos" EntitySet="WeatherInfos" />
@@ -1133,11 +1074,33 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="WeatherInfos" EntitySet="WeatherInfos" />
           </AssociationSet>
-          <AssociationSet Name="FK_WeatherInfos_WeatherInfos_Categorys" Association="Self.FK_WeatherInfos_WeatherInfos_Categorys">
+          <EntitySet Name="WeatherInfos_Categorys" EntityType="QMPModel.WeatherInfos_Categorys" />
+          <AssociationSet Name="FK_WeatherInfos_WeatherInfos_Categorys" Association="QMPModel.FK_WeatherInfos_WeatherInfos_Categorys">
             <End Role="WeatherInfos_Categorys" EntitySet="WeatherInfos_Categorys" />
             <End Role="WeatherInfos" EntitySet="WeatherInfos" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="WeatherInfos_Categorys">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="WeatherInfos" Relationship="QMPModel.FK_WeatherInfos_WeatherInfos_Categorys" FromRole="WeatherInfos_Categorys" ToRole="WeatherInfos" />
+        </EntityType>
+        <Association Name="FK_WeatherInfos_WeatherInfos_Categorys">
+          <End Type="QMPModel.WeatherInfos_Categorys" Role="WeatherInfos_Categorys" Multiplicity="0..1" />
+          <End Type="QMPModel.WeatherInfos" Role="WeatherInfos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeatherInfos_Categorys">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="WeatherInfos">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1359,10 +1322,9 @@
           <EntitySetMapping Name="WeatherInfos_Categorys">
             <EntityTypeMapping TypeName="QMPModel.WeatherInfos_Categorys">
               <MappingFragment StoreEntitySet="WeatherInfos_Categorys">
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

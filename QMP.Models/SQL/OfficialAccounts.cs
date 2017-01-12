@@ -24,7 +24,6 @@ namespace QMP.Models.SQL
             this.Subscribers = new HashSet<Subscribers>();
             this.Users = new HashSet<Users>();
             this.WarnInfos = new HashSet<WarnInfos>();
-            this.WeatherInfos_Categorys = new HashSet<WeatherInfos_Categorys>();
             this.WeatherInfos = new HashSet<WeatherInfos>();
         }
     
@@ -53,7 +52,6 @@ namespace QMP.Models.SQL
         public virtual ICollection<Subscribers> Subscribers { get; set; }
         public virtual ICollection<Users> Users { get; set; }
         public virtual ICollection<WarnInfos> WarnInfos { get; set; }
-        public virtual ICollection<WeatherInfos_Categorys> WeatherInfos_Categorys { get; set; }
         public virtual ICollection<WeatherInfos> WeatherInfos { get; set; }
     }
 }

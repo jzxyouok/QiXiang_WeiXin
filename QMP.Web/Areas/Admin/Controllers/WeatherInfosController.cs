@@ -45,7 +45,7 @@ namespace QMP.Web.Areas.Admin.Controllers
 
 
             ///
-            WeatherInfos_Categorys cate =new WeatherInfos_Categorys_BLL().Get(a => a.AccountID == user.AccountID && a.CategoryName == "三天预报");
+            WeatherInfos_Categorys cate =new WeatherInfos_Categorys_BLL().Get(a =>  a.CategoryName == "三天预报");
 
 
             model.CategoryID = cate.CategoryID;
