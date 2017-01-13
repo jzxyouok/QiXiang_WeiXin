@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using QMP.Models.Oracle;
 using QMP.ViewModels;
+using QMP.ViewModels.Emergency;
 
 namespace QMP.Web.Areas.WeiXin.Controllers
 {
@@ -16,6 +17,18 @@ namespace QMP.Web.Areas.WeiXin.Controllers
             OracleSAEntities db = new OracleSAEntities();
             List<YTHPT_EMERGENCY_WEATHER> list = db.YTHPT_EMERGENCY_WEATHER.Where(a => a.COUNTRY == "城阳").OrderByDescending(a=>a.RELEASETIME).ToList();
 
+            List<YTHPT_EMERGENCY_SERVICE> slist = db.YTHPT_EMERGENCY_SERVICE.Where(a => a.COUNTRY == "城阳").OrderByDescending(a => a.CREATETIME).ToList();
+
+            if (slist.Count() > 0)
+            {
+                ViewBag.Title = "城阳区：" + slist.FirstOrDefault().NAME;
+
+            }
+            else
+            {
+                ViewBag.Title = "城阳区应急服务";
+
+            }
             return View(list);
         }
 
@@ -36,6 +49,30 @@ namespace QMP.Web.Areas.WeiXin.Controllers
             re.DateTime = ((DateTime)data.FirstOrDefault().FDATE).ToString("yyyy-MM-dd HH:mm");
             re.DataList = data;
             return Json(re, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult _GetEmergencyStationLastJson()
+        {
+            OracleSAEntities db = new OracleSAEntities();
+            List<YTHPT_EMERGENCY_STATION> slist = db.YTHPT_EMERGENCY_STATION.ToList();
+
+            List<Emergency_Station_Data_ViewModel> totallist = new List<Emergency_Station_Data_ViewModel>();
+            foreach (var station in slist)
+            {
+                QMP.BLL.SQL.Emergency.Emergency_Station_BLL bll = new BLL.SQL.Emergency.Emergency_Station_BLL();
+             List< Emergency_Station_Data_ViewModel> vlist=   bll.GetLast(station);
+                totallist.AddRange(vlist);
+
+            }
+            return Json(totallist, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult _GetEmergencyServiceLastJson()
+        {
+            OracleSAEntities db = new OracleSAEntities();
+            List<YTHPT_EMERGENCY_SERVICE> list = db.YTHPT_EMERGENCY_SERVICE.Where(a => a.COUNTRY == "城阳").OrderByDescending(a => a.CREATETIME).ToList();
+            return Json(list, JsonRequestBehavior.AllowGet);
+
         }
     }
 }

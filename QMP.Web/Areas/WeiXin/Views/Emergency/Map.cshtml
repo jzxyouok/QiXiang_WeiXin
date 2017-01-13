@@ -1,43 +1,91 @@
 ﻿@model IEnumerable<QMP.Models.Oracle.YTHPT_EMERGENCY_WEATHER>
 @{
-    ViewBag.Title = "Map";
+    //ViewBag.Title = "Map";
     Layout = "~/Areas/WeiXin/Views/Shared/_Layout.cshtml";
 }
 
 <div id="mapcontainer" style="width: 100%; height: 100%;">
 </div>
+<div id="emergency_title_div">
+    @ViewBag.Title
+</div>
 <div id="emergencyweatherdiv">
-   @foreach (var item in Model)
-   {
-       <div style="width: 100%;background-color:rgba(0, 148, 255, 0.53);margin:3px;  padding: 15px;">
-           <p><strong>@item.EMERGENCY</strong></p>
-           <p>@item.RELEASETIME</p>
-           <p>@item.CONTENT</p>
-       </div>
-    <div style="width: 100%;background-color:rgba(0, 148, 255, 0.53);margin:3px;  padding: 15px;">
-        <p><strong>@item.EMERGENCY</strong></p>
-        <p>@item.RELEASETIME</p>
-        <p>@item.CONTENT</p>
-    </div>
-   }
+    @foreach (var item in Model)
+    {
+        <div class="emergency_weather_item">
+            <p style="font-size:16px; font-weight: bold;color:#ff0000;">@item.RELEASETIME</p>
+            <p>@item.EMERGENCY</p>
+            <p>@item.CONTENT</p>
+        </div>
+       
+    }
 </div>
 @section Scripts{
     <style type="text/css">
         .table-marker {
-
             width: 100px;
-            background-color: rgba(255, 106, 0, 0.55);
+            background-color: rgba(0, 148, 255, 0.7);
+            border-radius: 5px;
+            box-shadow: 3px 3px 10px #736f6f;
         }
-        .table-marker td {
-            padding: 2px 5px;
+
+            .table-marker td {
+                padding: 2px 5px;
+            }
+
+
+
+
+        .table-marker-station {
+            width: 100px;
+            background-color: rgba(255, 106, 0, 0.7);
+            border-radius: 5px;
+            box-shadow: 3px 3px 10px #736f6f;
         }
-        #emergencyweatherdiv { 
-            width:300px;
+
+            .table-marker-station td {
+                padding: 2px 5px;
+            }
+
+
+
+        .div-marker-service {
+            font-size: 16px;
+            color: red;
+            background-color: white;
+            padding: 5px;
+            white-space: nowrap;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+
+        #emergency_title_div {
+            position: absolute;
+            top: 15px;
+            left: 70px;
+            white-space: nowrap;
+            font-size: 30px;
+            font-weight: bold;
+            color: red;
+            text-shadow: 2px 2px 10px #3c3838;
+        }
+
+
+        #emergencyweatherdiv {
+            width: 300px;
             position: absolute;
             top: 50px;
-            right:50px;
-            
-          
+            right: 50px;
+        }
+
+        .emergency_weather_item {
+            width: 100%;
+            background-color: rgba(173, 169, 177, 0.8);;
+            margin: 8px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 3px 3px 10px #736f6f;
         }
     </style>
     <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=4e6fb107331302e5167ccd3888684981"></script>
@@ -66,36 +114,24 @@
         map.setCity(currentcity);
         //在地图中添加ToolBar插件
         map.plugin(["AMap.ToolBar"],
-            function() {
+            function () {
                 var toolBar = new AMap.ToolBar();
                 map.addControl(toolBar);
 
             });
 
-
-        var AddMarker = function(lng, lat, data) {
-
-
+        //自动站
+        var AddMarker = function (lng, lat, data) {
             var marker = new AMap.Marker({
-                icon: "../../Content/images/local.png",
+                icon: "../../Content/images/local_blue.png",
                 //icon: "../../../../Content/images/iconfont-dingwei32.png",
                 offset: new AMap.Pixel(-16, -28),
                 position: new AMap.LngLat(lng, lat),
                 extData: data,
                 topWhenClick: true
-
             });
             marker.setMap(map); //在地图上添加点
-
-
             var htmlstr = ""; //width:60px;height:30px;
-
-
-            //htmlstr += "<table style='border-collapse: collapse;'>";
-            //htmlstr += "<tr><td style='border:1px solid rgba(235, 79, 56, 0.81);background-color:rgba(235, 79, 56, 0.81); color: white; text-align: center;padding:0 2px;font-size:12px;word-break:keep-all;white-space:nowrap;'>" + data.StaName + "</td></tr>";
-            //htmlstr += "<tr><td style='border:1px solid rgba(235, 79, 56, 0.81);background-color:rgba(255, 255, 255, 0.81);text-align: center;padding:0 2px;font-size:12px;word-break:keep-all;white-space:nowrap;'>" + data.Value + " mm</td></tr></table>";
-
-
             htmlstr += "<table class='table-marker' style='font-size: 12px;'><tr><td colspan='2'>" +
                 data.STANAME +
                 "</td></tr><tr><td>温度:</td><td>" +
@@ -105,114 +141,135 @@
                 " m/s</td></tr><tr><td>降水:</td><td>" +
                 data.HRAIN +
                 " mm</td></tr></table>";
-
-
             var markerhtml = new AMap.Marker({
                 offset: new AMap.Pixel(15, -30),
-
                 content: htmlstr,
                 title: data.StaName,
                 extData: data,
                 position: new AMap.LngLat(lng, lat),
-
                 topWhenClick: true
-
             });
             markerhtml.setMap(map); //在地图上添加点
-
-
-            //鼠标点击marker弹出自定义的信息窗体
-            AMap.event.addListener(marker,
-                'click',
-                function(e) {
-                    //console.log(e)
-                    //console.log(marker)
-                    console.log(marker.getExtData())
-                    var edata = marker.getExtData();
-
-
-                    var content = "<table style='font-size: 12px;'><tr><td>站点:</td><td>" +
-                        edata.STANAME +
-                        "</td></tr><tr><td>温度:</td><td>" +
-                        edata.TEMPERATURE +
-                        " ℃</td></tr><tr><td>风速:</td><td>" +
-                        edata.DWSPEED +
-                        " m/s</td></tr><tr><td>降水:</td><td>" +
-                        edata.HRAIN +
-                        " mm</td></tr></table>";
-                    infoWindow.setContent(content);
-                    infoWindow.open(map, marker.getPosition());
-
-
-                });
-            //鼠标点击marker弹出自定义的信息窗体
-            AMap.event.addListener(markerhtml,
-                'click',
-                function(e) {
-                    //console.log(e)
-                    //console.log(marker)
-                    console.log(marker.getExtData());
-                    var edata = marker.getExtData();
-
-
-                    var content = "<table style='font-size: 12px;'><tr><td>站点:</td><td>" +
-                        edata.STANAME +
-                        "</td></tr><tr><td>温度:</td><td>" +
-                        edata.TEMPERATURE +
-                        " ℃</td></tr><tr><td>风速:</td><td>" +
-                        edata.DWSPEED +
-                        " m/s</td></tr><tr><td>降水:</td><td>" +
-                        edata.HRAIN +
-                        " mm</td></tr></table>";
-                    infoWindow.setContent(content);
-                    infoWindow.open(map, marker.getPosition());
-
-
-                });
-
         }
-
-
-        $(function() {
+        //应急站点
+        var AddMarker_Station = function (lng, lat, data) {
+            var marker = new AMap.Marker({
+                icon: "../../Content/images/local.png",
+                //icon: "../../../../Content/images/iconfont-dingwei32.png",
+                offset: new AMap.Pixel(-16, -28),
+                position: new AMap.LngLat(lng, lat),
+                extData: data,
+                topWhenClick: true
+            });
+            marker.setMap(map); //在地图上添加点
+            var htmlstr = ""; //width:60px;height:30px;
+            htmlstr += "<table class='table-marker-station' style='font-size: 12px;'><tr><td colspan='2'>" +
+                data.StationName +
+                "</td></tr><tr><td>温度:</td><td>" +
+                data.Temperature +
+                " ℃</td></tr><tr><td>风速:</td><td>" +
+                data.WindSpeed +
+                " m/s</td></tr><tr><td>降水:</td><td>" +
+                data.Rain +
+                " mm</td></tr></table>";
+            var markerhtml = new AMap.Marker({
+                offset: new AMap.Pixel(15, -30),
+                content: htmlstr,
+                title: data.StaName,
+                extData: data,
+                position: new AMap.LngLat(lng, lat),
+                topWhenClick: true
+            });
+            markerhtml.setMap(map); //在地图上添加点
+        }
+        //应急服务
+        var AddMarker_Service = function (lng, lat, data) {
+            var marker = new AMap.Marker({
+                icon: "../../Content/images/fire.png",
+                //icon: "../../../../Content/images/iconfont-dingwei32.png",
+                offset: new AMap.Pixel(-32, -32),
+                position: new AMap.LngLat(lng, lat),
+                extData: data,
+                topWhenClick: true
+            });
+            marker.setMap(map); //在地图上添加点
+            var htmlstr = ""; //width:60px;height:30px;
+            htmlstr += "<div class='div-marker-service' >" +
+                data.NAME +
+                "</div>";
+            var markerhtml = new AMap.Marker({
+                offset: new AMap.Pixel(30, -10),
+                content: htmlstr,
+                title: data.StaName,
+                extData: data,
+                position: new AMap.LngLat(lng, lat),
+                topWhenClick: true
+            });
+            markerhtml.setMap(map); //在地图上添加点
+        }
+        $(function () {
+            //zidongzhan
             $.ajax({
                 type: "GET",
                 url: "../../WeiXin/Emergency/_GetSkListJson",
                 //data: "city="+currentcity,
                 dataType: "json",
-                success: function(data) {
+                success: function (data) {
                     console.log(data);
 
 
                     var datalist = data.DataList;
 
                     $(datalist)
-                        .each(function(index, element) {
+                        .each(function (index, element) {
                             AddMarker(element.LON, element.LAT, element);
+
+                        });
+                }
+            });
+            //yingjidian
+            $.ajax({
+                type: "GET",
+                url: "../../WeiXin/Emergency/_GetEmergencyStationLastJson",
+                //data: "city="+currentcity,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+
+
+                    $(data)
+                        .each(function (index, element) {
+                            AddMarker_Station(element.Longitude, element.Latitude, element);
+
+                        });
+                }
+            });
+            //service
+            $.ajax({
+                type: "GET",
+                url: "../../WeiXin/Emergency/_GetEmergencyServiceLastJson",
+                //data: "city="+currentcity,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+
+
+                    $(data)
+                        .each(function (index, element) {
+                            AddMarker_Service(element.LONGITUDE, element.LATITUDE, element);
 
                         });
                 }
             });
         });
 
-        //实例化信息窗体
-        var infoWindow = new AMap.InfoWindow({
-            //isCustom: true,  //使用自定义窗体
-            //content: info
-            offset: new AMap.Pixel(0, -32) //-113, -140
-        });
-
-
-        //关闭信息窗体
-        function closeInfoWindow() {
-            map.clearInfoWindow();
-        }
 
         addCountry();
 
         function addCountry() {
             //加载行政区划插件
             AMap.service('AMap.DistrictSearch',
-                function() {
+                function () {
                     var opts = {
                         subdistrict: 1, //返回下一级行政区
                         extensions: 'all', //返回行政区边界坐标组等具体信息
@@ -223,7 +280,7 @@
                     district.setLevel('district');
                     //行政区查询
                     district.search(currentcity,
-                        function(status, result) {
+                        function (status, result) {
                             var bounds = result.districtList[0].boundaries;
                             var polygons = [];
                             if (bounds) {

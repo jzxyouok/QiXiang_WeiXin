@@ -55,6 +55,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BLL_Template_QMP.tt</DependentUpon>
     </Compile>
+    <Compile Include="SQL\Emergency\Emergency_Station_BLL.cs" />
     <Compile Include="SQL\Users_BLL.cs" />
   </ItemGroup>
   <ItemGroup>

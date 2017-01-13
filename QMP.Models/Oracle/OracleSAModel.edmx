@@ -141,6 +141,17 @@
           <Property Name="MINVISIBILITYTIME" Type="date" />
           <Property Name="SID" Type="number" Precision="38" Scale="0" />
         </EntityType>
+        <EntityType Name="YTHPT_EMERGENCY_SERVICE">
+          <Key>
+            <PropertyRef Name="FID" />
+          </Key>
+          <Property Name="FID" Type="nvarchar2" MaxLength="64" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar2" MaxLength="50" />
+          <Property Name="LONGITUDE" Type="number" Precision="38" Scale="0" />
+          <Property Name="LATITUDE" Type="number" Precision="38" Scale="0" />
+          <Property Name="COUNTRY" Type="nvarchar2" MaxLength="20" />
+          <Property Name="CREATETIME" Type="date" />
+        </EntityType>
         <EntityType Name="YTHPT_EMERGENCY_STATION">
           <Key>
             <PropertyRef Name="FID" />
@@ -169,6 +180,7 @@
           <EntitySet Name="AWS_BASE_INFO" EntityType="Self.AWS_BASE_INFO" Schema="SA" store:Type="Tables" />
           <EntitySet Name="DATAHOUR" EntityType="Self.DATAHOUR" Schema="SA" store:Type="Tables" />
           <EntitySet Name="DATATEST" EntityType="Self.DATATEST" Schema="SA" store:Type="Tables" />
+          <EntitySet Name="YTHPT_EMERGENCY_SERVICE" EntityType="Self.YTHPT_EMERGENCY_SERVICE" Schema="SA" store:Type="Tables" />
           <EntitySet Name="YTHPT_EMERGENCY_STATION" EntityType="Self.YTHPT_EMERGENCY_STATION" Schema="SA" store:Type="Tables" />
           <EntitySet Name="YTHPT_EMERGENCY_WEATHER" EntityType="Self.YTHPT_EMERGENCY_WEATHER" Schema="SA" store:Type="Tables" />
         </EntityContainer>
@@ -318,6 +330,7 @@
           <EntitySet Name="DATATEST" EntityType="Self.DATATEST" />
           <EntitySet Name="YTHPT_EMERGENCY_STATION" EntityType="OracleSAModel.YTHPT_EMERGENCY_STATION" />
           <EntitySet Name="YTHPT_EMERGENCY_WEATHER" EntityType="OracleSAModel.YTHPT_EMERGENCY_WEATHER" />
+          <EntitySet Name="YTHPT_EMERGENCY_SERVICE" EntityType="OracleSAModel.YTHPT_EMERGENCY_SERVICE" />
         </EntityContainer>
         <EntityType Name="YTHPT_EMERGENCY_STATION">
           <Key>
@@ -342,6 +355,17 @@
           <Property Name="CREATETIME" Type="DateTime" />
           <Property Name="COUNTRY" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="EMERGENCY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="YTHPT_EMERGENCY_SERVICE">
+          <Key>
+            <PropertyRef Name="FID" />
+          </Key>
+          <Property Name="FID" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LONGITUDE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="LATITUDE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COUNTRY" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CREATETIME" Type="DateTime" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -509,6 +533,18 @@
                 <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
                 <ScalarProperty Name="RELEASETIME" ColumnName="RELEASETIME" />
                 <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+                <ScalarProperty Name="FID" ColumnName="FID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="YTHPT_EMERGENCY_SERVICE">
+            <EntityTypeMapping TypeName="OracleSAModel.YTHPT_EMERGENCY_SERVICE">
+              <MappingFragment StoreEntitySet="YTHPT_EMERGENCY_SERVICE">
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="COUNTRY" ColumnName="COUNTRY" />
+                <ScalarProperty Name="LATITUDE" ColumnName="LATITUDE" />
+                <ScalarProperty Name="LONGITUDE" ColumnName="LONGITUDE" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="FID" ColumnName="FID" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -74,6 +74,7 @@
     <Compile Include="API\WarnInfoAdd_ViewModel.cs" />
     <Compile Include="API\WeatherInfoAdd_ViewModel.cs" />
     <Compile Include="Cloud_ViewModel.cs" />
+    <Compile Include="Emergency\Emergency_Station_Data_ViewModel.cs" />
     <Compile Include="HistoryChartValue_ViewModel.cs" />
     <Compile Include="LiveValue_ViewModel.cs" />
     <Compile Include="Messages_ViewModel.cs" />

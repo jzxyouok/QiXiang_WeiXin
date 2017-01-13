@@ -211,9 +211,11 @@
     <Content Include="Content\images\article\laixi_shortnear.jpg" />
     <Content Include="Content\images\article\yztq.jpg" />
     <Content Include="Content\images\article\zhyj.jpg" />
+    <Content Include="Content\images\fire.png" />
     <Content Include="Content\images\jiaozhouradarbianjie.png" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\images\local.png" />
+    <Content Include="Content\images\local_blue.png" />
     <Content Include="Content\images\smile.png" />
     <Content Include="Content\images\success.png" />
     <Content Include="Content\images\tree.png" />
@@ -385,6 +387,7 @@
     <Content Include="Areas\Super\Views\web.config" />
     <Content Include="Areas\Super\Views\Station\OracleToSql.cshtml" />
     <Content Include="Areas\Super\Views\Station\Service.cshtml" />
+    <Content Include="Areas\WeiXin\Views\Emergency\GetTest.cshtml" />
     <None Include="Properties\PublishProfiles\mvc5.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\Highcharts-4.0.1\js\adapters\standalone-framework.js" />

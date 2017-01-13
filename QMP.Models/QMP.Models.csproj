@@ -72,6 +72,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OracleSAModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Oracle\YTHPT_EMERGENCY_SERVICE.cs">
+      <DependentUpon>OracleSAModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Oracle\YTHPT_EMERGENCY_STATION.cs">
       <DependentUpon>OracleSAModel.tt</DependentUpon>
     </Compile>

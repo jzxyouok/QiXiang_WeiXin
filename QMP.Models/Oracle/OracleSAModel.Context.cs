@@ -30,5 +30,6 @@ namespace QMP.Models.Oracle
         public DbSet<DATATEST> DATATEST { get; set; }
         public DbSet<YTHPT_EMERGENCY_STATION> YTHPT_EMERGENCY_STATION { get; set; }
         public DbSet<YTHPT_EMERGENCY_WEATHER> YTHPT_EMERGENCY_WEATHER { get; set; }
+        public DbSet<YTHPT_EMERGENCY_SERVICE> YTHPT_EMERGENCY_SERVICE { get; set; }
     }
 }

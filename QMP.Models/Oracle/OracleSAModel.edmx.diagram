@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="OracleSAModel.DATATEST" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OracleSAModel.YTHPT_EMERGENCY_STATION" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="OracleSAModel.YTHPT_EMERGENCY_WEATHER" Width="1.5" PointX="7.375" PointY="4.75" />
+        <EntityTypeShape EntityType="OracleSAModel.YTHPT_EMERGENCY_SERVICE" Width="1.5" PointX="7.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
