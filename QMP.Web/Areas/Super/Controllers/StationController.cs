@@ -15,7 +15,7 @@ namespace QMP.Web.Areas.Super.Controllers
         public ActionResult OracleToSql()
         {
             OracleSAEntities db = new OracleSAEntities();
-            List<AWS_BASE_INFO> fList = db.AWS_BASE_INFO.Where(a => a.QXNAME == "城阳区").ToList();
+            List<AWS_BASE_INFO> fList = db.AWS_BASE_INFO.Where(a => a.QXNAME == "平度市").ToList();
 
 
             AutoStations_BLL bll = new AutoStations_BLL();
@@ -24,10 +24,10 @@ namespace QMP.Web.Areas.Super.Controllers
             {
                 AutoStations sta = new AutoStations()
                 {
-                    AccountID=Guid.Parse("2bd6e7f9-e442-4cad-a9de-12f62e637551"),
+                    AccountID=Guid.Parse("fdffff70-e7a1-4df0-a4b7-54815cb983ce"),
                     Latitude=double.Parse(awsBaseInfo.LAT.ToString()),
                     Longitude=double.Parse(awsBaseInfo.LON_.ToString()),
-                    Country="城阳区",
+                    Country= "平度市",
                     StationName=awsBaseInfo.SNAME,
                     ShortName=awsBaseInfo.SNAME
                 };

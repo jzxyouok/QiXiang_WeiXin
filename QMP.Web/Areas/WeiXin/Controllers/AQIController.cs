@@ -103,6 +103,22 @@ namespace QMP.Web.Areas.WeiXin.Controllers
             {
                 url = "http://172.18.226.106:88/chengyang/aqi/GetAQIJson";
             }
+            else if (city == "平度市")
+            {
+                url = "http://172.18.226.106:88/pingdu/aqi/GetAQIJson";
+            }
+            else if (city == "崂山区")
+            {
+                url = "http://172.18.226.106:88/laoshan/aqi/GetAQIJson";
+            }
+            else if (city == "即墨市")
+            {
+                url = "http://172.18.226.106:88/jimo/aqi/GetAQIJson";
+            }
+            else if (city == "黄岛区")
+            {
+                url = "http://172.18.226.106:88/huangdao/aqi/GetAQIJson";
+            }
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 
             request.Method = "GET";
