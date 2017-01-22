@@ -20,5 +20,6 @@ namespace QMP.Models.Oracle
         public Nullable<decimal> LATITUDE { get; set; }
         public string COUNTRY { get; set; }
         public Nullable<System.DateTime> CREATETIME { get; set; }
+        public string STATE { get; set; }
     }
 }

@@ -15,13 +15,23 @@ namespace QMP.Web.Areas.WeiXin.Controllers
         public ActionResult Map()
         {
             OracleSAEntities db = new OracleSAEntities();
-            List<YTHPT_EMERGENCY_WEATHER> list = db.YTHPT_EMERGENCY_WEATHER.Where(a => a.COUNTRY == "城阳").OrderByDescending(a=>a.RELEASETIME).ToList();
 
-            List<YTHPT_EMERGENCY_SERVICE> slist = db.YTHPT_EMERGENCY_SERVICE.Where(a => a.COUNTRY == "城阳").OrderByDescending(a => a.CREATETIME).ToList();
+
+            List<YTHPT_EMERGENCY_SERVICE> slist = db.YTHPT_EMERGENCY_SERVICE.Where(a => a.COUNTRY.Contains("城阳") && a.STATE != "结束").OrderByDescending(a => a.CREATETIME).ToList();
+            List<YTHPT_EMERGENCY_WEATHER> wlist = new List<YTHPT_EMERGENCY_WEATHER>();
+
+            foreach (var item in slist)
+            {
+                List<YTHPT_EMERGENCY_WEATHER> ilist = db.YTHPT_EMERGENCY_WEATHER.Where(a => a.EMERGENCY==item.NAME).OrderByDescending(a => a.RELEASETIME).ToList();
+                wlist.AddRange(ilist);
+            }
+
+
+           
 
             if (slist.Count() > 0)
             {
-                ViewBag.Title = "城阳区：" + slist.FirstOrDefault().NAME;
+                ViewBag.Title = "城阳区" + slist.FirstOrDefault().NAME;
 
             }
             else
@@ -29,7 +39,7 @@ namespace QMP.Web.Areas.WeiXin.Controllers
                 ViewBag.Title = "城阳区应急服务";
 
             }
-            return View(list);
+            return View(wlist);
         }
 
         public JsonResult _GetSkListJson()
@@ -54,7 +64,17 @@ namespace QMP.Web.Areas.WeiXin.Controllers
         public JsonResult _GetEmergencyStationLastJson()
         {
             OracleSAEntities db = new OracleSAEntities();
-            List<YTHPT_EMERGENCY_STATION> slist = db.YTHPT_EMERGENCY_STATION.ToList();
+
+            List<YTHPT_EMERGENCY_SERVICE> serlist = db.YTHPT_EMERGENCY_SERVICE.Where(a => a.COUNTRY.Contains("城阳") && a.STATE != "结束").OrderByDescending(a => a.CREATETIME).ToList();
+
+            List<YTHPT_EMERGENCY_STATION> slist = new List<YTHPT_EMERGENCY_STATION>();
+            foreach (var item in serlist)
+            {
+                List<YTHPT_EMERGENCY_STATION> ilist = db.YTHPT_EMERGENCY_STATION.Where(a => a.EMERGENCY == item.NAME).OrderByDescending(a => a.CREATETIME).ToList();
+                slist.AddRange(ilist);
+            }
+
+           
 
             List<Emergency_Station_Data_ViewModel> totallist = new List<Emergency_Station_Data_ViewModel>();
             foreach (var station in slist)
@@ -70,7 +90,7 @@ namespace QMP.Web.Areas.WeiXin.Controllers
         public JsonResult _GetEmergencyServiceLastJson()
         {
             OracleSAEntities db = new OracleSAEntities();
-            List<YTHPT_EMERGENCY_SERVICE> list = db.YTHPT_EMERGENCY_SERVICE.Where(a => a.COUNTRY == "城阳").OrderByDescending(a => a.CREATETIME).ToList();
+            List<YTHPT_EMERGENCY_SERVICE> list = db.YTHPT_EMERGENCY_SERVICE.Where(a => a.COUNTRY.Contains("城阳")&&a.STATE!="结束").OrderByDescending(a => a.CREATETIME).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
 
         }
